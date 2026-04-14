@@ -2,6 +2,8 @@
 
 Private-template repository for spinning up a Check Point-focused OpenCode environment in GitHub Codespaces.
 
+> ✅ **First-run success target:** after Codespace startup, both OpenCode (`4096`) and reports (`8081`) are reachable and setup status prints `complete`.
+
 When a Codespace starts from this template, it:
 
 - installs OpenCode automatically
@@ -74,3 +76,20 @@ The local report server publishes this directory for easy sharing/review within 
 - No real credentials are stored in this repository.
 - Secrets are resolved from Codespaces environment variables and stored only in user-scoped runtime files under `~/.config/opencode`.
 - Validation output is redacted and does not print secrets.
+
+## Quick troubleshooting
+
+### Setup shows `pending`
+
+- Cause: one or more mandatory secrets are missing.
+- Fix: add missing Codespaces secrets and run `bash scripts/first-run-checkpoint-setup.sh`.
+
+### OpenCode UI is not reachable
+
+- Cause: OpenCode process did not start or port forwarding was not opened yet.
+- Fix: run `bash scripts/start-opencode-web.sh`, then open forwarded port `4096` from the Codespaces Ports panel.
+
+### Reports URL is not reachable
+
+- Cause: local HTML server is not running.
+- Fix: run `bash scripts/start-report-server.sh`, then open forwarded port `8081`.
