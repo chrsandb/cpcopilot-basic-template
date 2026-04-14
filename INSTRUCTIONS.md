@@ -44,6 +44,22 @@ That agent is tuned to:
 - avoid direct raw API calls unless explicitly requested or required for troubleshooting
 - generate structured internal HTML reports when useful
 
+## Default model
+
+This repository preconfigures OpenCode with the free OpenCode Zen model:
+
+- `opencode/big-pickle`
+
+Important:
+
+- this only works after the user has authenticated OpenCode to the `opencode` provider / OpenCode Zen
+- if no OpenCode Zen credentials are connected yet, OpenCode may fall back to connection/setup steps before the model can be used
+
+## Web UI notes
+
+- A best-effort intro session is seeded automatically with the prompt `Tell me about yourself` after OpenCode starts.
+- There is currently no officially documented OpenCode setting for forcing the Web UI right file panel closed by default, so this template does **not** apply a brittle UI-state hack for that.
+
 ## Important behavior expectations
 
 - Prefer the configured Check Point MCP tools over raw API calls.

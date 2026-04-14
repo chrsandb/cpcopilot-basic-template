@@ -37,6 +37,8 @@ cd "${REPO_ROOT}"
 nohup opencode web --hostname 0.0.0.0 --port "${OPENCODE_PORT}" </dev/null >"${LOG_FILE}" 2>&1 &
 echo $! > "${PID_FILE}"
 
+nohup bash "${REPO_ROOT}/scripts/seed-opencode-session.sh" >/dev/null 2>&1 &
+
 echo "[opencode] web mode started on 0.0.0.0:${OPENCODE_PORT}."
 echo "[opencode] local URL: http://localhost:${OPENCODE_PORT}"
 echo "[opencode] log file : ${LOG_FILE}"

@@ -12,6 +12,7 @@ When a Codespace starts from this template, it:
 - forwards the OpenCode web port and report server port
 - provisions a global `checkpoint-copilot` OpenCode skill
 - sets a `checkpoint-copilot` primary OpenCode agent as the default active agent
+- sets the default model to the free OpenCode Zen model `opencode/big-pickle`
 - runs first-run setup for required secrets (with interactive prompts when possible)
 - shows a terminal welcome/instructions flow when you open the first visible bash terminal
 - validates setup and prints a redacted summary
@@ -58,6 +59,7 @@ Based on the official Check Point MCP packages:
   3. starts OpenCode web (`scripts/start-opencode-web.sh`)
   4. runs quick validation (`scripts/validate-environment.sh --quick`)
 - On later Codespace restarts/resumes, `postStartCommand` automatically starts OpenCode and the reports server again if setup had already completed.
+- After OpenCode starts, the template seeds a best-effort intro session using the prompt `Tell me about yourself`.
 
 If secrets are missing and startup is non-interactive, setup remains pending and you can complete it manually:
 
@@ -103,3 +105,13 @@ The local report server publishes this directory for easy sharing/review within 
 
 - Cause: MCP packages may not be locally installed/cached yet.
 - Fix: rebuild the Codespace or run `bash scripts/setup-opencode.sh` once. This template now installs the Check Point MCP packages locally and launches them via local binaries instead of `npx -y`.
+
+### Big Pickle is configured but OpenCode still asks for provider setup
+
+- Cause: the default model is `opencode/big-pickle`, but OpenCode Zen authentication has not been completed yet.
+- Fix: connect OpenCode to the `opencode` provider / OpenCode Zen, then restart OpenCode.
+
+### Web UI panel layout is not exactly as desired
+
+- Cause: OpenCode's official config/docs do not currently document a supported setting to force the right file panel closed on Web UI open.
+- Fix: use the seeded intro session and default agent/model setup; panel-layout forcing is intentionally not hacked into the template.
