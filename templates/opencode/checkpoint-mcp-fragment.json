@@ -1,0 +1,60 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "management": {
+      "type": "local",
+      "enabled": true,
+      "command": ["npx", "-y", "@chkp/quantum-management-mcp"],
+      "environment": {
+        "MANAGEMENT_HOST": "{env:CHECKPOINT_MGMT_HOST}",
+        "MANAGEMENT_PORT": "{env:CHECKPOINT_MGMT_PORT}",
+        "USERNAME": "{env:CHECKPOINT_USERNAME}",
+        "PASSWORD": "{env:CHECKPOINT_PASSWORD}"
+      }
+    },
+    "management-logs": {
+      "type": "local",
+      "enabled": true,
+      "command": ["npx", "-y", "@chkp/management-logs-mcp"],
+      "environment": {
+        "MANAGEMENT_HOST": "{env:CHECKPOINT_MGMT_HOST}",
+        "MANAGEMENT_PORT": "{env:CHECKPOINT_MGMT_PORT}",
+        "USERNAME": "{env:CHECKPOINT_USERNAME}",
+        "PASSWORD": "{env:CHECKPOINT_PASSWORD}"
+      }
+    },
+    "threat-prevention": {
+      "type": "local",
+      "enabled": true,
+      "command": ["npx", "-y", "@chkp/threat-prevention-mcp"],
+      "environment": {
+        "MANAGEMENT_HOST": "{env:CHECKPOINT_MGMT_HOST}",
+        "MANAGEMENT_PORT": "{env:CHECKPOINT_MGMT_PORT}",
+        "USERNAME": "{env:CHECKPOINT_USERNAME}",
+        "PASSWORD": "{env:CHECKPOINT_PASSWORD}"
+      }
+    },
+    "https-inspection": {
+      "type": "local",
+      "enabled": true,
+      "command": ["npx", "-y", "@chkp/https-inspection-mcp"],
+      "environment": {
+        "MANAGEMENT_HOST": "{env:CHECKPOINT_MGMT_HOST}",
+        "MANAGEMENT_PORT": "{env:CHECKPOINT_MGMT_PORT}",
+        "USERNAME": "{env:CHECKPOINT_USERNAME}",
+        "PASSWORD": "{env:CHECKPOINT_PASSWORD}"
+      }
+    },
+    "documentation-tool": {
+      "type": "local",
+      "enabled": true,
+      "command": ["npx", "-y", "@chkp/documentation-mcp"],
+      "environment": {
+        "CLIENT_ID": "{env:CHECKPOINT_DOC_CLIENT_ID}",
+        "SECRET_KEY": "{env:CHECKPOINT_DOC_SECRET_KEY}",
+        "AUTH_URL": "{env:CHECKPOINT_DOC_AUTH_URL}",
+        "REGION": "{env:CHECKPOINT_DOC_REGION}"
+      }
+    }
+  }
+}

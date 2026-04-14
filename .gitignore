@@ -1,0 +1,16 @@
+# Local secrets and environment overrides
+.env
+.env.local
+.codespaces/
+
+# User/runtime state
+*.log
+*.pid
+.tmp/
+
+# Node / Python transient
+node_modules/
+__pycache__/
+
+# OpenCode local/runtime files (if placed in repo accidentally)
+.opencode/

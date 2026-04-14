@@ -1,0 +1,36 @@
+{
+  "name": "checkpoint-opencode-codespaces",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "remoteUser": "node",
+  "updateRemoteUserUID": true,
+  "forwardPorts": [4096, 8081],
+  "portsAttributes": {
+    "4096": {
+      "label": "OpenCode Web UI",
+      "onAutoForward": "openBrowser",
+      "visibility": "private"
+    },
+    "8081": {
+      "label": "Check Point HTML Reports",
+      "onAutoForward": "notify",
+      "visibility": "private"
+    }
+  },
+  "postCreateCommand": "bash scripts/setup-opencode.sh && bash scripts/validate-environment.sh --quick",
+  "postStartCommand": "bash scripts/post-start.sh",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    },
+    "codespaces": {
+      "openFiles": [
+        "README.md",
+        "AGENTS.md"
+      ]
+    }
+  }
+}
