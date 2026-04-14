@@ -110,6 +110,13 @@
         align-items: center;
       }
 
+      .toolbar-stack {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.2rem;
+      }
+
       button {
         border: 0;
         border-radius: 10px;
@@ -124,6 +131,11 @@
 
       .status {
         font-size: 0.94rem;
+        color: var(--muted);
+      }
+
+      .auto-refresh-note {
+        font-size: 0.82rem;
         color: var(--muted);
       }
 
@@ -238,7 +250,10 @@
         <div class="toolbar">
           <h2>Available reports</h2>
           <div class="toolbar-actions">
-            <span class="status" id="statusText">Loading report list…</span>
+            <div class="toolbar-stack">
+              <span class="status" id="statusText">Loading report list…</span>
+              <span class="auto-refresh-note" id="autoRefreshText">Auto-refresh every 60 seconds.</span>
+            </div>
             <button id="refreshButton" type="button">Refresh list</button>
           </div>
         </div>
@@ -274,10 +289,14 @@
       const reportCount = document.getElementById('reportCount');
       const lastUpdated = document.getElementById('lastUpdated');
       const refreshButton = document.getElementById('refreshButton');
+      const autoRefreshText = document.getElementById('autoRefreshText');
       const errorState = document.getElementById('errorState');
       const emptyState = document.getElementById('emptyState');
       const tableWrap = document.getElementById('tableWrap');
       const reportsTableBody = document.getElementById('reportsTableBody');
+      const AUTO_REFRESH_MS = 60000;
+      let autoRefreshTimer = null;
+      let nextRefreshAt = Date.now() + AUTO_REFRESH_MS;
 
       function formatDate(value) {
         const date = new Date(value);
@@ -329,8 +348,24 @@
         }
       }
 
-      async function loadReports() {
-        statusText.textContent = 'Loading report list…';
+      function scheduleNextRefresh() {
+        if (autoRefreshTimer) {
+          clearTimeout(autoRefreshTimer);
+        }
+
+        nextRefreshAt = Date.now() + AUTO_REFRESH_MS;
+        autoRefreshTimer = setTimeout(() => {
+          loadReports({ silent: true });
+        }, AUTO_REFRESH_MS);
+      }
+
+      function updateAutoRefreshText() {
+        const secondsRemaining = Math.max(0, Math.ceil((nextRefreshAt - Date.now()) / 1000));
+        autoRefreshText.textContent = `Auto-refresh in ${secondsRemaining} second${secondsRemaining === 1 ? '' : 's'}.`;
+      }
+
+      async function loadReports({ silent = false } = {}) {
+        statusText.textContent = silent ? 'Refreshing report list…' : 'Loading report list…';
         refreshButton.disabled = true;
 
         try {
@@ -348,24 +383,29 @@
           if (reports.length === 0) {
             setVisibleState({ showTable: false, showEmpty: true, showError: false });
             statusText.textContent = 'No reports found.';
+            scheduleNextRefresh();
             return;
           }
 
           renderReports(reports);
           setVisibleState({ showTable: true, showEmpty: false, showError: false });
           statusText.textContent = 'Report list loaded.';
+          scheduleNextRefresh();
         } catch (error) {
           console.error(error);
           reportCount.textContent = 'Report list unavailable';
           lastUpdated.textContent = 'Last updated: unavailable';
           setVisibleState({ showTable: false, showEmpty: false, showError: true });
           statusText.textContent = 'Failed to load reports.';
+          scheduleNextRefresh();
         } finally {
           refreshButton.disabled = false;
         }
       }
 
       refreshButton.addEventListener('click', loadReports);
+      updateAutoRefreshText();
+      setInterval(updateAutoRefreshText, 1000);
       loadReports();
     </script>
   </body>
