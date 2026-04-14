@@ -72,7 +72,12 @@ If secrets are missing and startup is non-interactive, setup remains pending and
 - OpenCode Web UI: forwarded `4096`
 - HTML reports server: forwarded `8081`
 
-Use the Codespaces **Ports** panel to open forwarded private URLs.
+In a real Codespace, the terminal can derive the forwarded hostname from the documented default variables `CODESPACE_NAME` and `GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN`, producing URLs like:
+
+- `https://$CODESPACE_NAME-4096.$GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN`
+- `https://$CODESPACE_NAME-8081.$GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN`
+
+Outside Codespaces, the scripts fall back to `http://localhost:PORT`.
 
 ## Reports
 
@@ -101,7 +106,7 @@ The local report server publishes this directory for easy sharing/review within 
 ### Reports URL is not reachable
 
 - Cause: local HTML server is not running.
-- Fix: run `bash scripts/start-report-server.sh`, then open forwarded port `8081`.
+- Fix: run `bash scripts/start-report-server.sh`, then open the preferred URL printed in the terminal (forwarded in Codespaces, localhost elsewhere).
 
 ### MCP checks feel slow at OpenCode startup
 

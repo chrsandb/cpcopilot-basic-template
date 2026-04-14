@@ -40,13 +40,15 @@ Startup command pattern:
 ## How to open the OpenCode Web UI
 
 - Open the forwarded port for `OPENCODE_PORT` (default `4096`) in Codespaces.
-- Or use local URL inside container: `http://localhost:4096`.
+- In a real Codespace, the forwarded URL pattern is `https://$CODESPACE_NAME-$OPENCODE_PORT.$GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN`.
+- Outside Codespaces, use the local URL inside the container, such as `http://localhost:4096`.
 
 ## How to open generated HTML reports
 
 - Reports are served by `scripts/start-report-server.sh`.
 - Default port is `8081`.
 - Open the forwarded `8081` port in Codespaces.
+- In a real Codespace, the forwarded URL pattern is `https://$CODESPACE_NAME-8081.$GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN`.
 - Reports are written to `reports/`.
 
 ## Secrets and credential handling
@@ -132,7 +134,7 @@ For best results, include:
 ## Report output location
 
 - Repository path: `reports/`
-- Served locally over port `8081`
+- Served over port `8081` (forwarded URL in Codespaces, localhost elsewhere)
 
 ## Security guidance
 

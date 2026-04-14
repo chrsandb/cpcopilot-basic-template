@@ -10,6 +10,8 @@ Welcome to the Check Point-focused OpenCode Codespace.
 4. Open the forwarded **OpenCode Web UI** port: `4096`
 5. Open the forwarded **HTML Reports** port: `8081`
 
+When running inside GitHub Codespaces, the terminal welcome flow prints the forwarded URLs directly using the documented `CODESPACE_NAME` and `GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN` environment variables. Outside Codespaces, it prints `localhost` URLs instead.
+
 ## Required secrets
 
 Set these as GitHub Codespaces secrets for the repository or your account:

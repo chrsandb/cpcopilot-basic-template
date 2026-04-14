@@ -3,6 +3,10 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+# shellcheck source=./lib/url_helpers.sh
+source "${SCRIPT_DIR}/lib/url_helpers.sh"
+
 STATE_DIR="${HOME}/.local/state/checkpoint-copilot"
 STATUS_FILE="${HOME}/.config/opencode/checkpoint-setup-status.json"
 USER_ENV_FILE="${HOME}/.config/opencode/checkpoint-secrets.env"
@@ -18,6 +22,8 @@ fi
 
 OPENCODE_PORT="${OPENCODE_PORT:-4096}"
 REPORTS_PORT="${REPORTS_PORT:-8081}"
+OPENCODE_URL="$(service_url_for_port "${OPENCODE_PORT}")"
+REPORTS_URL="$(service_url_for_port "${REPORTS_PORT}")"
 SETUP_COMPLETE="false"
 
 if [[ -f "${STATUS_FILE}" ]] && command -v jq >/dev/null 2>&1; then
@@ -57,7 +63,7 @@ else
   echo ""
   echo "- OpenCode UI    : not started yet"
   echo "- Reports        : not started yet"
-  echo "- Ports tip      : finish setup first, then open the forwarded URLs from the Codespaces Ports panel"
+  echo "- Ports tip      : finish setup first, then re-run this welcome flow to print the preferred service URLs"
   exit 0
 fi
 
@@ -67,6 +73,10 @@ bash "${REPO_ROOT}/scripts/start-report-server.sh" || true
 bash "${REPO_ROOT}/scripts/validate-environment.sh" --quick || true
 
 echo ""
-echo "- OpenCode UI    : http://localhost:${OPENCODE_PORT}"
-echo "- Reports        : http://localhost:${REPORTS_PORT}"
-echo "- Ports tip      : use the Codespaces Ports panel to open the forwarded private URLs"
+echo "- OpenCode UI    : ${OPENCODE_URL}"
+echo "- Reports        : ${REPORTS_URL}"
+if [[ -n "${CODESPACE_NAME:-}" && -n "${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN:-}" ]]; then
+  echo "- Ports tip      : these forwarded URLs were derived from CODESPACE_NAME and GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN"
+else
+  echo "- Ports tip      : Codespaces forwarding variables were not detected, so localhost URLs are shown"
+fi
