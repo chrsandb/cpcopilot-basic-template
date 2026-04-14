@@ -3,6 +3,9 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+NPM_GLOBAL_BIN="${HOME}/.local/npm-global/bin"
+
+export PATH="${NPM_GLOBAL_BIN}:${PATH}"
 
 QUICK_MODE=false
 if [[ "${1:-}" == "--quick" ]]; then
@@ -46,7 +49,7 @@ check_cmd python3
 check_cmd opencode
 
 for mcp_bin in quantum-management-mcp management-logs-mcp threat-prevention-mcp https-inspection-mcp documentation-mcp; do
-  if [[ -x "/home/node/.local/npm-global/bin/${mcp_bin}" ]]; then
+  if [[ -x "${NPM_GLOBAL_BIN}/${mcp_bin}" ]]; then
     pass "${mcp_bin} is installed locally"
   else
     fail "${mcp_bin} is not installed locally"

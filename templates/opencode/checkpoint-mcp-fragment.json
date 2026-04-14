@@ -4,7 +4,7 @@
     "management": {
       "type": "local",
       "enabled": true,
-      "command": ["/home/node/.local/npm-global/bin/quantum-management-mcp"],
+      "command": ["{env:HOME}/.local/npm-global/bin/quantum-management-mcp"],
       "environment": {
         "MANAGEMENT_HOST": "{env:CHECKPOINT_MGMT_HOST}",
         "MANAGEMENT_PORT": "{env:CHECKPOINT_MGMT_PORT}",
@@ -15,7 +15,7 @@
     "management-logs": {
       "type": "local",
       "enabled": true,
-      "command": ["/home/node/.local/npm-global/bin/management-logs-mcp"],
+      "command": ["{env:HOME}/.local/npm-global/bin/management-logs-mcp"],
       "environment": {
         "MANAGEMENT_HOST": "{env:CHECKPOINT_MGMT_HOST}",
         "MANAGEMENT_PORT": "{env:CHECKPOINT_MGMT_PORT}",
@@ -26,7 +26,7 @@
     "threat-prevention": {
       "type": "local",
       "enabled": true,
-      "command": ["/home/node/.local/npm-global/bin/threat-prevention-mcp"],
+      "command": ["{env:HOME}/.local/npm-global/bin/threat-prevention-mcp"],
       "environment": {
         "MANAGEMENT_HOST": "{env:CHECKPOINT_MGMT_HOST}",
         "MANAGEMENT_PORT": "{env:CHECKPOINT_MGMT_PORT}",
@@ -37,7 +37,7 @@
     "https-inspection": {
       "type": "local",
       "enabled": true,
-      "command": ["/home/node/.local/npm-global/bin/https-inspection-mcp"],
+      "command": ["{env:HOME}/.local/npm-global/bin/https-inspection-mcp"],
       "environment": {
         "MANAGEMENT_HOST": "{env:CHECKPOINT_MGMT_HOST}",
         "MANAGEMENT_PORT": "{env:CHECKPOINT_MGMT_PORT}",
@@ -48,7 +48,7 @@
     "documentation-tool": {
       "type": "local",
       "enabled": true,
-      "command": ["/home/node/.local/npm-global/bin/documentation-mcp"],
+      "command": ["{env:HOME}/.local/npm-global/bin/documentation-mcp"],
       "environment": {
         "CLIENT_ID": "{env:CHECKPOINT_DOC_CLIENT_ID}",
         "SECRET_KEY": "{env:CHECKPOINT_DOC_SECRET_KEY}",
