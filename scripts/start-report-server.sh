@@ -26,7 +26,7 @@ if [[ -f "${PID_FILE}" ]] && kill -0 "$(cat "${PID_FILE}")" 2>/dev/null; then
 fi
 
 cd "${REPO_ROOT}"
-nohup python3 -m http.server "${REPORTS_PORT}" --bind 0.0.0.0 --directory "${REPO_ROOT}/reports" >"${LOG_FILE}" 2>&1 &
+nohup python3 "${REPO_ROOT}/scripts/report_server.py" >"${LOG_FILE}" 2>&1 &
 echo $! > "${PID_FILE}"
 
 echo "[reports] server started on 0.0.0.0:${REPORTS_PORT}."

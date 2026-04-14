@@ -5,23 +5,368 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Check Point CoPilot Reports</title>
     <style>
-      body { font-family: Arial, sans-serif; margin: 2rem; background: #f7f9fc; color: #1f2937; }
-      .card { background: white; border-radius: 10px; padding: 1.2rem 1.4rem; box-shadow: 0 2px 10px rgba(0,0,0,.08); max-width: 900px; }
-      h1 { margin-top: 0; }
-      code { background: #eef2ff; padding: .15rem .35rem; border-radius: 5px; }
-      ul { line-height: 1.6; }
+      :root {
+        color-scheme: light;
+        --bg: #f4f7fb;
+        --panel: #ffffff;
+        --panel-muted: #f8fbff;
+        --text: #18212f;
+        --muted: #5f6b7a;
+        --border: #d9e3f0;
+        --accent: #2563eb;
+        --accent-soft: #e8f0ff;
+        --success: #0f766e;
+        --warning-bg: #fff8e6;
+        --warning-border: #f2d58a;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Inter, Arial, sans-serif;
+        background: linear-gradient(180deg, #eef4ff 0%, var(--bg) 40%, #f8fbff 100%);
+        color: var(--text);
+      }
+
+      .page {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 2rem 1.25rem 3rem;
+      }
+
+      .hero,
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+      }
+
+      .hero {
+        padding: 1.5rem 1.5rem 1.25rem;
+        margin-bottom: 1rem;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.35rem 0.7rem;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-size: 0.86rem;
+        font-weight: 700;
+      }
+
+      h1 {
+        margin: 0.9rem 0 0.65rem;
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+      }
+
+      p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1.1rem;
+      }
+
+      .badge {
+        background: var(--panel-muted);
+        border: 1px solid var(--border);
+        color: var(--muted);
+        border-radius: 999px;
+        padding: 0.45rem 0.8rem;
+        font-size: 0.92rem;
+      }
+
+      .panel {
+        padding: 1.1rem;
+      }
+
+      .toolbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .toolbar h2 {
+        margin: 0;
+        font-size: 1.15rem;
+      }
+
+      .toolbar-actions {
+        display: flex;
+        gap: 0.65rem;
+        align-items: center;
+      }
+
+      button {
+        border: 0;
+        border-radius: 10px;
+        background: var(--accent);
+        color: white;
+        font-weight: 700;
+        padding: 0.7rem 1rem;
+        cursor: pointer;
+      }
+
+      button:hover { filter: brightness(1.05); }
+
+      .status {
+        font-size: 0.94rem;
+        color: var(--muted);
+      }
+
+      .empty-state,
+      .error-state {
+        border: 1px dashed var(--border);
+        border-radius: 16px;
+        padding: 1.25rem;
+        background: var(--panel-muted);
+      }
+
+      .empty-state strong,
+      .error-state strong {
+        display: block;
+        margin-bottom: 0.4rem;
+        font-size: 1.02rem;
+        color: var(--text);
+      }
+
+      .empty-state {
+        background: var(--warning-bg);
+        border-color: var(--warning-border);
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--panel);
+      }
+
+      th,
+      td {
+        padding: 0.95rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+      }
+
+      th {
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--muted);
+        background: #f8fbff;
+      }
+
+      tr:last-child td { border-bottom: 0; }
+
+      a {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      a:hover { text-decoration: underline; }
+
+      .filename {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+      }
+
+      .subtle {
+        color: var(--muted);
+        font-size: 0.88rem;
+        word-break: break-all;
+      }
+
+      .helper-list {
+        margin: 1rem 0 0;
+        padding-left: 1.2rem;
+        color: var(--muted);
+      }
+
+      .helper-list li { margin: 0.35rem 0; }
+
+      .hidden { display: none !important; }
+
+      @media (max-width: 700px) {
+        .page { padding: 1rem 0.9rem 2rem; }
+        th:nth-child(3), td:nth-child(3) { display: none; }
+      }
     </style>
   </head>
   <body>
-    <div class="card">
-      <h1>Check Point CoPilot Reports</h1>
-      <p>This local server hosts generated HTML reports for your Check Point-focused OpenCode workflow.</p>
-      <ul>
-        <li>Place generated reports in <code>reports/</code> (this directory).</li>
-        <li>Use descriptive names (for example: <code>threat-prevention-review-2026-04-14.html</code>).</li>
-        <li>Avoid including raw secrets or credentials in report content.</li>
-      </ul>
-      <p>If no additional files are listed by your browser, generate your first report from OpenCode.</p>
-    </div>
+    <main class="page">
+      <section class="hero">
+        <div class="eyebrow">📄 Report index</div>
+        <h1>Check Point CoPilot Reports</h1>
+        <p>
+          This page shows every report currently available in <code>reports/</code>.
+          The table below is populated dynamically from the local report server.
+        </p>
+        <div class="meta">
+          <span class="badge" id="reportCount">Checking reports…</span>
+          <span class="badge" id="lastUpdated">Last updated: pending</span>
+        </div>
+        <ul class="helper-list">
+          <li>Generate HTML reports into <code>reports/</code>.</li>
+          <li>Use descriptive filenames such as <code>threat-prevention-review-2026-04-14.html</code>.</li>
+          <li>Do not include raw secrets or credentials in report content.</li>
+        </ul>
+      </section>
+
+      <section class="panel">
+        <div class="toolbar">
+          <h2>Available reports</h2>
+          <div class="toolbar-actions">
+            <span class="status" id="statusText">Loading report list…</span>
+            <button id="refreshButton" type="button">Refresh list</button>
+          </div>
+        </div>
+
+        <div id="errorState" class="error-state hidden">
+          <strong>Could not load the report list.</strong>
+          <p>The report server API did not respond as expected. Try refreshing the list or restarting the reports server.</p>
+        </div>
+
+        <div id="emptyState" class="empty-state hidden">
+          <strong>No reports are available yet.</strong>
+          <p>There are currently no generated reports in <code>reports/</code>. Create your first report from OpenCode and then refresh this page.</p>
+        </div>
+
+        <div id="tableWrap" class="table-wrap hidden">
+          <table>
+            <thead>
+              <tr>
+                <th>Report</th>
+                <th>Modified</th>
+                <th>Size</th>
+                <th>Open</th>
+              </tr>
+            </thead>
+            <tbody id="reportsTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const statusText = document.getElementById('statusText');
+      const reportCount = document.getElementById('reportCount');
+      const lastUpdated = document.getElementById('lastUpdated');
+      const refreshButton = document.getElementById('refreshButton');
+      const errorState = document.getElementById('errorState');
+      const emptyState = document.getElementById('emptyState');
+      const tableWrap = document.getElementById('tableWrap');
+      const reportsTableBody = document.getElementById('reportsTableBody');
+
+      function formatDate(value) {
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) {
+          return 'Unknown';
+        }
+        return new Intl.DateTimeFormat(undefined, {
+          dateStyle: 'medium',
+          timeStyle: 'short',
+        }).format(date);
+      }
+
+      function formatBytes(bytes) {
+        if (!Number.isFinite(bytes) || bytes < 0) {
+          return 'Unknown';
+        }
+        if (bytes === 0) {
+          return '0 B';
+        }
+        const units = ['B', 'KB', 'MB', 'GB'];
+        const exponent = Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length - 1);
+        const value = bytes / 1024 ** exponent;
+        return `${value.toFixed(value >= 10 || exponent === 0 ? 0 : 1)} ${units[exponent]}`;
+      }
+
+      function setVisibleState({ showTable, showEmpty, showError }) {
+        tableWrap.classList.toggle('hidden', !showTable);
+        emptyState.classList.toggle('hidden', !showEmpty);
+        errorState.classList.toggle('hidden', !showError);
+      }
+
+      function renderReports(reports) {
+        reportsTableBody.innerHTML = '';
+
+        for (const report of reports) {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>
+              <div class="filename">
+                <a href="${report.url}" target="_blank" rel="noopener noreferrer">${report.name}</a>
+                <span class="subtle">${report.path}</span>
+              </div>
+            </td>
+            <td>${formatDate(report.modifiedAt)}</td>
+            <td>${formatBytes(report.sizeBytes)}</td>
+            <td><a href="${report.url}" target="_blank" rel="noopener noreferrer">Open report</a></td>
+          `;
+          reportsTableBody.appendChild(row);
+        }
+      }
+
+      async function loadReports() {
+        statusText.textContent = 'Loading report list…';
+        refreshButton.disabled = true;
+
+        try {
+          const response = await fetch(`/api/reports?ts=${Date.now()}`, { cache: 'no-store' });
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+
+          const payload = await response.json();
+          const reports = Array.isArray(payload.reports) ? payload.reports : [];
+
+          reportCount.textContent = `${reports.length} report${reports.length === 1 ? '' : 's'} available`;
+          lastUpdated.textContent = `Last updated: ${formatDate(payload.generatedAt)}`;
+
+          if (reports.length === 0) {
+            setVisibleState({ showTable: false, showEmpty: true, showError: false });
+            statusText.textContent = 'No reports found.';
+            return;
+          }
+
+          renderReports(reports);
+          setVisibleState({ showTable: true, showEmpty: false, showError: false });
+          statusText.textContent = 'Report list loaded.';
+        } catch (error) {
+          console.error(error);
+          reportCount.textContent = 'Report list unavailable';
+          lastUpdated.textContent = 'Last updated: unavailable';
+          setVisibleState({ showTable: false, showEmpty: false, showError: true });
+          statusText.textContent = 'Failed to load reports.';
+        } finally {
+          refreshButton.disabled = false;
+        }
+      }
+
+      refreshButton.addEventListener('click', loadReports);
+      loadReports();
+    </script>
   </body>
 </html>
