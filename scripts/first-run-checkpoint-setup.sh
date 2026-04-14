@@ -108,7 +108,7 @@ chmod 600 "${USER_ENV_FILE}"
 BASE_CONFIG_JSON="$(mktemp)"
 cat > "${BASE_CONFIG_JSON}" <<EOF
 {
-  "$schema": "https://opencode.ai/config.json",
+  "\$schema": "https://opencode.ai/config.json",
   "server": {
     "port": ${OPENCODE_PORT},
     "hostname": "0.0.0.0"
