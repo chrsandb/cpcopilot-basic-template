@@ -1,6 +1,6 @@
-# Check Point OpenCode Codespaces Template
+# Check Point OpenCode Copilot Codespaces Template
 
-Private-template repository for spinning up a Check Point-focused OpenCode environment in GitHub Codespaces.
+Template repository for spinning up a Check Point-focused OpenCode environment in GitHub Codespaces.
 
 > ✅ **First-run success target:** after Codespace startup, both OpenCode (`4096`) and reports (`8081`) are reachable and setup status prints `complete`.
 
@@ -62,7 +62,6 @@ Based on the official Check Point MCP packages:
   3. starts OpenCode web (`scripts/start-opencode-web.sh`)
   4. runs quick validation (`scripts/validate-environment.sh --quick`)
 - On later Codespace restarts/resumes, `postStartCommand` automatically starts OpenCode and the reports server again if setup had already completed.
-- After OpenCode starts, the template seeds a best-effort intro session using the prompt `Tell me about yourself`.
 
 If secrets are missing and startup is non-interactive, setup remains pending and you can complete it manually:
 
@@ -117,4 +116,4 @@ The local report server publishes this directory for easy sharing/review within 
 ### Web UI panel layout is not exactly as desired
 
 - Cause: OpenCode's official config/docs do not currently document a supported setting to force the right file panel closed on Web UI open.
-- Fix: use the seeded intro session and default agent/model setup; panel-layout forcing is intentionally not hacked into the template.
+- Fix: use the default agent/model setup; panel-layout forcing is intentionally not hacked into the template.

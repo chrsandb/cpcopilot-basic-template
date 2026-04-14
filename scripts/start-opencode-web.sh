@@ -8,7 +8,6 @@ USER_ENV_FILE="${HOME}/.config/opencode/checkpoint-secrets.env"
 STATE_DIR="${HOME}/.local/state/checkpoint-copilot"
 PID_FILE="${STATE_DIR}/opencode-web.pid"
 LOG_FILE="${STATE_DIR}/opencode-web.log"
-SEED_INFO_FILE="${STATE_DIR}/opencode-intro-session.json"
 
 mkdir -p "${STATE_DIR}"
 
@@ -34,21 +33,12 @@ if [[ -f "${PID_FILE}" ]] && kill -0 "$(cat "${PID_FILE}")" 2>/dev/null; then
   exit 0
 fi
 
+rm -f "${STATE_DIR}/opencode-intro-seeded" "${STATE_DIR}/opencode-intro-session.json"
+
 cd "${REPO_ROOT}"
 nohup env -C "${REPO_ROOT}" opencode web --hostname 0.0.0.0 --port "${OPENCODE_PORT}" </dev/null >"${LOG_FILE}" 2>&1 &
 echo $! > "${PID_FILE}"
 
-bash "${REPO_ROOT}/scripts/seed-opencode-session.sh" || true
-
 echo "[opencode] web mode started on 0.0.0.0:${OPENCODE_PORT}."
 echo "[opencode] local URL: http://localhost:${OPENCODE_PORT}"
-if [[ -f "${SEED_INFO_FILE}" ]] && command -v jq >/dev/null 2>&1; then
-  intro_url="$(jq -r '.url // empty' "${SEED_INFO_FILE}")"
-  intro_path="$(jq -r '.path // empty' "${SEED_INFO_FILE}")"
-  if [[ -n "${intro_url}" ]]; then
-    echo "[opencode] intro session URL: ${intro_url}"
-  elif [[ -n "${intro_path}" ]]; then
-    echo "[opencode] intro session path: ${intro_path}"
-  fi
-fi
 echo "[opencode] log file : ${LOG_FILE}"

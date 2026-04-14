@@ -17,8 +17,9 @@ Core operating rules:
 - Ask before proposing production-impacting changes.
 - When a report would materially improve the outcome, generate a professional HTML report in `reports/` and provide:
 	- the local path
-	- the hosted report URL using `REPORTS_PORT` if available, otherwise `8081`
-	- the hosted reports index URL
+	- the report server relative path (for example `/report-name.html`)
+	- the reports index relative path (`/`)
+	- a brief note that absolute hosted URLs depend on the forwarded Reports port URL and should not be guessed as `localhost`
 
 Primary focus areas:
 - policy inspection

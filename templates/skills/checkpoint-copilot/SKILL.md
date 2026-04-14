@@ -73,9 +73,11 @@ When asked for a report, or when a report materially improves understanding:
 - Never include raw credentials, API keys, or secrets.
 - Return all of the following when a report is created:
   - the local path (for example `reports/example-report.html`)
-  - the hosted report URL using `REPORTS_PORT` if available, otherwise defaulting to `8081`
-  - the hosted reports index URL (`http://localhost:<REPORTS_PORT>/`)
-- When practical, also include the hosted report URL and index URL inside the report itself.
+  - the report server relative path (for example `/example-report.html`)
+  - the reports index relative path (`/`)
+- Do not invent absolute hosted URLs such as `http://localhost:8081/...` unless the actual externally reachable base URL is explicitly known.
+- In Codespaces or similar forwarded-port environments, tell the user to open the Reports port/index and use the relative report link from that same origin.
+- When practical, include a relative link back to the reports index inside the report itself.
 
 ## Out-of-scope handling
 

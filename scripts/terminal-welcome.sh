@@ -6,7 +6,6 @@ REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 STATE_DIR="${HOME}/.local/state/checkpoint-copilot"
 STATUS_FILE="${HOME}/.config/opencode/checkpoint-setup-status.json"
 USER_ENV_FILE="${HOME}/.config/opencode/checkpoint-secrets.env"
-SEED_INFO_FILE="${STATE_DIR}/opencode-intro-session.json"
 
 mkdir -p "${STATE_DIR}"
 
@@ -69,11 +68,5 @@ bash "${REPO_ROOT}/scripts/validate-environment.sh" --quick || true
 
 echo ""
 echo "- OpenCode UI    : http://localhost:${OPENCODE_PORT}"
-if [[ -f "${SEED_INFO_FILE}" ]] && command -v jq >/dev/null 2>&1; then
-  intro_url="$(jq -r '.url // empty' "${SEED_INFO_FILE}")"
-  if [[ -n "${intro_url}" ]]; then
-    echo "- Intro session  : ${intro_url}"
-  fi
-fi
 echo "- Reports        : http://localhost:${REPORTS_PORT}"
 echo "- Ports tip      : use the Codespaces Ports panel to open the forwarded private URLs"

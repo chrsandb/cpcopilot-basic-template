@@ -58,7 +58,6 @@ Important:
 
 ## Web UI notes
 
-- A best-effort intro session is seeded automatically with the prompt `Tell me about yourself` after OpenCode starts.
 - There is currently no officially documented OpenCode setting for forcing the Web UI right file panel closed by default, so this template does **not** apply a brittle UI-state hack for that.
 - Guided setup asks for a Check Point API key first. If you leave it blank, the flow falls back to username/password with defaults of `admin` / `demo123`.
 
