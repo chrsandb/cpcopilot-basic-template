@@ -18,6 +18,7 @@ It is designed for operational analysis and assistant workflows centered on:
 A global OpenCode skill named `checkpoint-copilot` is installed at Codespace startup and guides OpenCode to:
 
 - prioritize Check Point MCP tools and documentation
+- use MCP tools instead of direct raw management API calls whenever possible
 - stay in Check Point operational context
 - label facts vs recommendations/inference clearly
 - request confirmation before production-impacting actions
@@ -77,6 +78,8 @@ On start, `scripts/first-run-checkpoint-setup.sh`:
 If startup is non-interactive and values are missing, run manually:
 
 - `bash scripts/first-run-checkpoint-setup.sh`
+
+When you open a terminal in Codespaces, the environment also prints a short welcome message and will guide you through pending setup interactively.
 
 ## Effective prompting tips
 

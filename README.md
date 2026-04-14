@@ -12,6 +12,7 @@ When a Codespace starts from this template, it:
 - forwards the OpenCode web port and report server port
 - provisions a global `checkpoint-copilot` OpenCode skill
 - runs first-run setup for required secrets (with interactive prompts when possible)
+- shows a terminal welcome/instructions flow when you open the console
 - validates setup and prints a redacted summary
 
 ## Required Codespaces secrets
@@ -53,6 +54,7 @@ Based on the official Check Point MCP packages:
   2. starts OpenCode web (`scripts/start-opencode-web.sh`)
   3. starts report server (`scripts/start-report-server.sh`)
   4. runs quick validation (`scripts/validate-environment.sh --quick`)
+- `postAttachCommand` runs `scripts/post-attach.sh` which prints terminal instructions and triggers interactive setup if required.
 
 If secrets are missing and startup is non-interactive, setup remains pending and you can complete it manually:
 
@@ -87,9 +89,14 @@ The local report server publishes this directory for easy sharing/review within 
 ### OpenCode UI is not reachable
 
 - Cause: OpenCode process did not start or port forwarding was not opened yet.
-- Fix: run `bash scripts/start-opencode-web.sh`, then open forwarded port `4096` from the Codespaces Ports panel.
+- Fix: run `bash scripts/post-attach.sh` or `bash scripts/start-opencode-web.sh`, then open forwarded port `4096` from the Codespaces Ports panel.
 
 ### Reports URL is not reachable
 
 - Cause: local HTML server is not running.
 - Fix: run `bash scripts/start-report-server.sh`, then open forwarded port `8081`.
+
+### MCP checks feel slow at OpenCode startup
+
+- Cause: MCP packages may not be locally installed/cached yet.
+- Fix: rebuild the Codespace or run `bash scripts/setup-opencode.sh` once. This template now installs the Check Point MCP packages locally and launches them via local binaries instead of `npx -y`.

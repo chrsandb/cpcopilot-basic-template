@@ -45,6 +45,14 @@ check_cmd jq
 check_cmd python3
 check_cmd opencode
 
+for mcp_bin in quantum-management-mcp management-logs-mcp threat-prevention-mcp https-inspection-mcp documentation-mcp; do
+  if [[ -x "/home/node/.local/npm-global/bin/${mcp_bin}" ]]; then
+    pass "${mcp_bin} is installed locally"
+  else
+    fail "${mcp_bin} is not installed locally"
+  fi
+done
+
 if command -v jq >/dev/null 2>&1; then
   HAS_JQ=true
 fi
@@ -77,6 +85,12 @@ else
   fail "AGENTS.md is missing"
 fi
 
+if [[ -f "${REPO_ROOT}/INSTRUCTIONS.md" ]]; then
+  pass "INSTRUCTIONS.md exists"
+else
+  fail "INSTRUCTIONS.md is missing"
+fi
+
 if [[ -f "${HOME}/.config/opencode/skills/checkpoint-copilot/SKILL.md" ]] || [[ -f "${REPO_ROOT}/templates/skills/checkpoint-copilot/SKILL.md" ]]; then
   pass "checkpoint-copilot skill exists"
 else
@@ -93,6 +107,12 @@ if grep -q "start-report-server.sh" "${REPO_ROOT}/scripts/post-start.sh" 2>/dev/
   pass "report server startup is configured"
 else
   fail "report server startup not configured"
+fi
+
+if grep -q "post-attach.sh" "${REPO_ROOT}/.devcontainer/devcontainer.json" 2>/dev/null; then
+  pass "terminal attach guidance is configured"
+else
+  fail "terminal attach guidance is not configured"
 fi
 
 if grep -q "opencode web" "${REPO_ROOT}/scripts/start-opencode-web.sh" 2>/dev/null; then

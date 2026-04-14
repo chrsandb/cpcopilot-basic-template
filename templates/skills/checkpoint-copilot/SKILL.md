@@ -26,6 +26,8 @@ Use these MCP servers as primary evidence sources when available:
 
 1. Prefer MCP tool evidence over assumptions.
 2. Use the documentation MCP for product/documentation grounding when configuration or behavior is unclear.
+3. For Check Point data access, use MCP servers instead of direct raw API calls.
+4. Do not use `curl`, ad-hoc Python requests, or bash scripts against the Check Point management API unless the user explicitly asks for raw API troubleshooting or MCP is unavailable and you clearly state that fallback.
 3. Clearly label:
    - facts (tool/documentation-backed)
    - inferences
@@ -53,6 +55,7 @@ Prioritize assistance for:
 - Ask for confirmation before proposing production-impacting actions.
 - Prefer staged/low-risk changes and rollback-aware plans.
 - Do not expose secrets, credentials, tokens, or raw sensitive values in outputs.
+- Treat MCP as the default interface to Check Point management data.
 
 ## Report generation behavior
 

@@ -21,6 +21,7 @@ fi
 OPENCODE_PORT="${OPENCODE_PORT:-4096}"
 
 export PATH="${HOME}/.local/npm-global/bin:${PATH}"
+export BROWSER="/bin/true"
 
 if ! command -v opencode >/dev/null 2>&1; then
   echo "[opencode] binary not found. Run scripts/setup-opencode.sh first."
@@ -33,8 +34,9 @@ if [[ -f "${PID_FILE}" ]] && kill -0 "$(cat "${PID_FILE}")" 2>/dev/null; then
 fi
 
 cd "${REPO_ROOT}"
-nohup opencode web --hostname 0.0.0.0 --port "${OPENCODE_PORT}" >"${LOG_FILE}" 2>&1 &
+nohup opencode web --hostname 0.0.0.0 --port "${OPENCODE_PORT}" </dev/null >"${LOG_FILE}" 2>&1 &
 echo $! > "${PID_FILE}"
 
 echo "[opencode] web mode started on 0.0.0.0:${OPENCODE_PORT}."
 echo "[opencode] local URL: http://localhost:${OPENCODE_PORT}"
+echo "[opencode] log file : ${LOG_FILE}"

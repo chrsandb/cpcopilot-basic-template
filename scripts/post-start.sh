@@ -20,6 +20,7 @@ REPORTS_PORT="${REPORTS_PORT:-8081}"
 
 echo ""
 echo "🚀 Check Point OpenCode Codespace is up"
+echo "- Instructions    : ${REPO_ROOT}/INSTRUCTIONS.md"
 echo "- OpenCode Web UI: http://localhost:${OPENCODE_PORT}"
 echo "- HTML reports   : http://localhost:${REPORTS_PORT}"
 

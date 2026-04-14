@@ -4,8 +4,30 @@
     "dockerfile": "Dockerfile"
   },
   "remoteUser": "node",
+  "userEnvProbe": "interactiveShell",
   "updateRemoteUserUID": true,
+  "waitFor": "postStartCommand",
   "forwardPorts": [4096, 8081],
+  "secrets": {
+    "CHECKPOINT_MGMT_HOST": {
+      "description": "Check Point management DNS name or IP"
+    },
+    "CHECKPOINT_USERNAME": {
+      "description": "Check Point management username"
+    },
+    "CHECKPOINT_PASSWORD": {
+      "description": "Check Point management password"
+    },
+    "CHECKPOINT_DOC_CLIENT_ID": {
+      "description": "Client ID for the Check Point documentation MCP"
+    },
+    "CHECKPOINT_DOC_SECRET_KEY": {
+      "description": "Secret key for the Check Point documentation MCP"
+    },
+    "OPENCODE_SERVER_PASSWORD": {
+      "description": "Optional basic-auth password for OpenCode web mode"
+    }
+  },
   "portsAttributes": {
     "4096": {
       "label": "OpenCode Web UI",
@@ -18,8 +40,9 @@
       "visibility": "private"
     }
   },
-  "postCreateCommand": "bash scripts/setup-opencode.sh && bash scripts/validate-environment.sh --quick",
-  "postStartCommand": "bash scripts/post-start.sh",
+  "postCreateCommand": "bash -i -c '${containerWorkspaceFolder}/scripts/setup-opencode.sh && ${containerWorkspaceFolder}/scripts/validate-environment.sh --quick'",
+  "postStartCommand": "bash -i -c '${containerWorkspaceFolder}/scripts/post-start.sh'",
+  "postAttachCommand": "bash -i -c '${containerWorkspaceFolder}/scripts/post-attach.sh'",
   "customizations": {
     "vscode": {
       "settings": {
@@ -28,8 +51,7 @@
     },
     "codespaces": {
       "openFiles": [
-        "README.md",
-        "AGENTS.md"
+        "INSTRUCTIONS.md"
       ]
     }
   }
