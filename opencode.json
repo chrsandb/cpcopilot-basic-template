@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "default_agent": "CheckPoint-copolit",
+  "default_agent": "CheckPoint-copilot",
   "model": "opencode/big-pickle",
   "instructions": [
     "INSTRUCTIONS.md",

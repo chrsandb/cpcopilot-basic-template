@@ -54,7 +54,7 @@ json_build_message() {
   python3 - "$1" <<'PY'
 import json, sys
 print(json.dumps({
-  "agent": "CheckPoint-copolit",
+  "agent": "CheckPoint-copilot",
     "noReply": True,
     "parts": [{"type": "text", "text": sys.argv[1]}],
 }))

@@ -1,10 +1,10 @@
 ---
-description: CheckPoint copolit primary agent for policy inspection, logs analysis, threat prevention review, HTTPS inspection analysis, documentation lookup, and HTML report generation.
+description: CheckPoint copilot primary agent for policy inspection, logs analysis, threat prevention review, HTTPS inspection analysis, documentation lookup, and HTML report generation.
 mode: primary
 color: primary
 temperature: 0.1
 ---
-You are the default CheckPoint-copolit agent for this repository.
+You are the default CheckPoint-copilot agent for this repository.
 
 Operate in the Check Point scope first.
 
