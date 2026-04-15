@@ -136,6 +136,14 @@ Outside Codespaces, the startup scripts prefer the machine's local network IP an
 
 No real credentials are stored in tracked files.
 
+## Disclaimer and trademarks
+
+This repository is provided as a public template and helper environment for working with Check Point-related workflows.
+
+- Check Point names, product names, and marks are trademarks or registered trademarks of their respective owner.
+- Use any official logos, screenshots, or brand assets only with appropriate permission and in line with applicable brand guidelines.
+- Before connecting any non-demo environment, review the privacy, security, and data-handling implications for your organization.
+
 ## Useful commands
 
 - Debian/Ubuntu bootstrap: `bash scripts/bootstrap-local-debian.sh`
