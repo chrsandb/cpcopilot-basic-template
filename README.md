@@ -44,8 +44,9 @@ More details can be found here: https://github.com/CheckPointSW/mcp-servers/tree
 4. Complete the guided setup in the terminal if prompted.
 5. Open the forwarded OpenCode port (`4096`).
 6. Open the forwarded Reports port (`8081`).
-7. In OpenCode, ask the `CheckPoint-copilot` agent questions or request reports.
-8. See more detailed instructions and troubleshooting steps in the [INSTRUCTIONS.md](INSTRUCTIONS.md) file - also opened in the Codespace.
+7. In OpenCode, select the `checkpoint-copilot-template` session.
+8. Ask the `CheckPoint-copilot` agent questions or request reports about your Check Point environment, policies, logs, threat prevention, HTTPS inspection, and documentation, or just start with a simple "hey" to confirm that it's working.
+9. See [INSTRUCTIONS.md](INSTRUCTIONS.md) for more detailed instructions and troubleshooting.
 
 Expected result:
 
@@ -76,29 +77,7 @@ Optional values if you need to override defaults:
 
 ## Quick start on Debian/Ubuntu
 
-### Before you start
-
-Collect the same required values:
-
-- `CHECKPOINT_MGMT_HOST`
-  - Placeholder: **[Add your internal instructions here for how to find the Check Point management DNS name or IP]**
-- Either:
-  - `CHECKPOINT_API_KEY`
-  - or `CHECKPOINT_USERNAME` + `CHECKPOINT_PASSWORD`
-  - Placeholder: **[Add your internal instructions here for how to obtain the API key or management credentials]**
-- `CHECKPOINT_DOC_CLIENT_ID`
-- `CHECKPOINT_DOC_SECRET_KEY`
-  - Placeholder: **[Add your internal instructions here for how to obtain the documentation tool client ID and secret key]**
-
-Optional values if you need to override defaults:
-
-- `CHECKPOINT_MGMT_PORT` (default `443`)
-- `CHECKPOINT_DOC_REGION` (default `EU`)
-- `CHECKPOINT_DOC_AUTH_URL`
-- `OPENCODE_SERVER_USERNAME` (default `admin`)
-- `OPENCODE_SERVER_PASSWORD` (default `demo123`)
-- `OPENCODE_PORT` (default `4096`)
-- `REPORTS_PORT` (default `8081`)
+Log into a Debian/Ubuntu machine with Internet access and follow the instructions below.
 
 ### Start it
 
@@ -108,6 +87,9 @@ Optional values if you need to override defaults:
 3. Complete the guided setup if prompted.
 4. Open the OpenCode URL printed by the script.
 5. Open the Reports URL printed by the script.
+6. In OpenCode, select the `checkpoint-copilot-template` session.
+7. Ask the `CheckPoint-copilot` agent questions or request reports about your Check Point environment, policies, logs, threat prevention, HTTPS inspection, and documentation, or just start with a simple "hey" to confirm that it's working.
+8. See [INSTRUCTIONS.md](INSTRUCTIONS.md) for more detailed instructions and troubleshooting.
 
 Outside Codespaces, the startup scripts prefer the machine's local network IP and fall back to `localhost` when needed.
 
