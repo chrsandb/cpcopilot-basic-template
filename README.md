@@ -11,6 +11,7 @@ When a Codespace starts from this template, it:
 - runs OpenCode in web mode
 - forwards the OpenCode web port and report server port
 - provisions a global `checkpoint-copilot` OpenCode skill
+- provisions a global `checkpoint-brand-webui` OpenCode skill for branded reports and web UI
 - sets a `CheckPoint-copilot` primary OpenCode agent as the default active agent
 - sets the default model to the free OpenCode Zen model `opencode/big-pickle`
 - runs first-run setup for required secrets (with interactive prompts when possible)
@@ -51,6 +52,11 @@ Based on the official Check Point MCP packages:
 - `threat-prevention` → `@chkp/threat-prevention-mcp`
 - `https-inspection` → `@chkp/https-inspection-mcp`
 - `documentation-tool` → `@chkp/documentation-mcp`
+
+## Included OpenCode skills
+
+- `checkpoint-copilot` for Check Point operational workflows
+- `checkpoint-brand-webui` for HTML reports, dashboards, and web UI that should follow Check Point 2026 brand styling
 
 ## Runtime flow
 

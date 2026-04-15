@@ -100,6 +100,12 @@ else
   fail "checkpoint-copilot skill missing"
 fi
 
+if [[ -f "${HOME}/.config/opencode/skills/checkpoint-brand-webui/SKILL.md" ]] || [[ -f "${REPO_ROOT}/templates/skills/checkpoint-brand-webui/SKILL.md" ]]; then
+  pass "checkpoint-brand-webui skill exists"
+else
+  fail "checkpoint-brand-webui skill missing"
+fi
+
 if [[ -d "${REPO_ROOT}/reports" ]]; then
   pass "reports directory exists"
 else

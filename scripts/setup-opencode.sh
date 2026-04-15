@@ -6,12 +6,11 @@ REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
 NPM_GLOBAL_DIR="${HOME}/.local/npm-global"
 OPENCODE_CONFIG_DIR="${HOME}/.config/opencode"
-SKILL_SRC="${REPO_ROOT}/templates/skills/checkpoint-copilot/SKILL.md"
-SKILL_DEST_DIR="${OPENCODE_CONFIG_DIR}/skills/checkpoint-copilot"
-SKILL_DEST="${SKILL_DEST_DIR}/SKILL.md"
+SKILLS_SRC_DIR="${REPO_ROOT}/templates/skills"
+SKILLS_DEST_DIR="${OPENCODE_CONFIG_DIR}/skills"
 SHELL_HOOK_FILE="${OPENCODE_CONFIG_DIR}/checkpoint-shell-hook.sh"
 
-mkdir -p "${NPM_GLOBAL_DIR}/bin" "${OPENCODE_CONFIG_DIR}" "${SKILL_DEST_DIR}" "${HOME}/.local/state/checkpoint-copilot"
+mkdir -p "${NPM_GLOBAL_DIR}/bin" "${OPENCODE_CONFIG_DIR}" "${SKILLS_DEST_DIR}" "${HOME}/.local/state/checkpoint-copilot"
 
 if ! command -v node >/dev/null 2>&1 || ! command -v npm >/dev/null 2>&1; then
   echo "[setup] Node.js/npm are required but not found. Ensure devcontainer build installs Node 20+."
@@ -44,8 +43,14 @@ npm install -g \
   @chkp/https-inspection-mcp \
   @chkp/documentation-mcp >/dev/null
 
-if [[ -f "${SKILL_SRC}" ]]; then
-  cp "${SKILL_SRC}" "${SKILL_DEST}"
+if [[ -d "${SKILLS_SRC_DIR}" ]]; then
+  find "${SKILLS_SRC_DIR}" -mindepth 1 -maxdepth 1 -type d | while read -r skill_dir; do
+    skill_name="$(basename "${skill_dir}")"
+    if [[ -f "${skill_dir}/SKILL.md" ]]; then
+      mkdir -p "${SKILLS_DEST_DIR}/${skill_name}"
+      cp "${skill_dir}/SKILL.md" "${SKILLS_DEST_DIR}/${skill_name}/SKILL.md"
+    fi
+  done
 fi
 
 cat > "${SHELL_HOOK_FILE}" <<EOF
@@ -77,7 +82,7 @@ mkdir -p "${REPO_ROOT}/reports"
 
 cat <<'MSG'
 [setup] OpenCode runtime prepared.
-[setup] Global skill installed: checkpoint-copilot
+[setup] Global skills installed from templates/skills/
 [setup] Interactive terminal welcome hook installed.
 [setup] Run scripts/first-run-checkpoint-setup.sh to complete Check Point MCP setup if needed.
 MSG

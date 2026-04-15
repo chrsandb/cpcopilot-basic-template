@@ -61,6 +61,7 @@ Prioritize assistance for:
 
 When asked for a report, or when a report materially improves understanding:
 
+- If the `checkpoint-brand-webui` skill is available, load and follow it for the report HTML and any related web UI styling.
 - Generate a professional HTML report in `reports/`.
 - Include:
   - timestamp

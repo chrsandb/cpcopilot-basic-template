@@ -25,6 +25,8 @@ A global OpenCode skill named `checkpoint-copilot` is installed at Codespace sta
 - avoid exposing secrets
 - generate professional HTML reports in `reports/` when useful
 
+An additional OpenCode skill named `checkpoint-brand-webui` is also installed and should be used for HTML reports, dashboards, and web pages that need to follow Check Point brand styling.
+
 ## How OpenCode is started
 
 OpenCode is started automatically in web mode by:

@@ -7,61 +7,82 @@
     <style>
       :root {
         color-scheme: light;
-        --bg: #f4f7fb;
-        --panel: #ffffff;
-        --panel-muted: #f8fbff;
-        --text: #18212f;
-        --muted: #5f6b7a;
-        --border: #d9e3f0;
-        --accent: #2563eb;
-        --accent-soft: #e8f0ff;
-        --success: #0f766e;
-        --warning-bg: #fff8e6;
-        --warning-border: #f2d58a;
+        --berry: #ee0c5d;
+        --berry-dark: #b70d4e;
+        --gravitas: #41273c;
+        --clay: #f2f2f2;
+        --white: #ffffff;
+        --black: #000000;
+        --purple: #741984;
+        --bg: var(--clay);
+        --panel: var(--white);
+        --panel-muted: #faf8fa;
+        --text: #21161f;
+        --muted: #6a5966;
+        --border: #e4d9df;
+        --accent: var(--berry);
+        --accent-soft: #fde8ef;
+        --warning-bg: #fff7ea;
+        --warning-border: #f1d3a4;
+        --shadow: 0 18px 40px rgba(65, 39, 60, 0.08);
       }
 
       * { box-sizing: border-box; }
       body {
         margin: 0;
-        font-family: Inter, Arial, sans-serif;
-        background: linear-gradient(180deg, #eef4ff 0%, var(--bg) 40%, #f8fbff 100%);
+        font-family: "DIN Pro", Arial, Helvetica, sans-serif;
+        background: var(--bg);
         color: var(--text);
       }
 
       .page {
-        max-width: 1100px;
+        max-width: 1160px;
         margin: 0 auto;
-        padding: 2rem 1.25rem 3rem;
+        padding: 2.25rem 1.25rem 3rem;
       }
 
       .hero,
       .panel {
         background: var(--panel);
         border: 1px solid var(--border);
-        border-radius: 18px;
-        box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+        border-radius: 14px;
+        box-shadow: var(--shadow);
       }
 
       .hero {
-        padding: 1.5rem 1.5rem 1.25rem;
-        margin-bottom: 1rem;
+        padding: 0;
+        margin-bottom: 1.25rem;
+        overflow: hidden;
+      }
+
+      .hero-top {
+        background: var(--gravitas);
+        color: var(--white);
+        padding: 1.5rem 1.5rem 1.35rem;
+        border-bottom: 4px solid var(--berry);
+      }
+
+      .hero-body {
+        padding: 1.35rem 1.5rem 1.5rem;
       }
 
       .eyebrow {
         display: inline-flex;
         align-items: center;
-        gap: 0.45rem;
-        padding: 0.35rem 0.7rem;
+        padding: 0.35rem 0.72rem;
         border-radius: 999px;
-        background: var(--accent-soft);
-        color: var(--accent);
-        font-size: 0.86rem;
+        background: rgba(255, 255, 255, 0.12);
+        color: #ffd6e6;
+        font-size: 0.82rem;
         font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
       }
 
       h1 {
-        margin: 0.9rem 0 0.65rem;
-        font-size: clamp(1.8rem, 3vw, 2.6rem);
+        margin: 0.9rem 0 0.55rem;
+        font-size: clamp(1.9rem, 3vw, 2.8rem);
+        line-height: 1.12;
       }
 
       p {
@@ -70,11 +91,16 @@
         line-height: 1.6;
       }
 
+      .hero-top p {
+        color: rgba(255, 255, 255, 0.82);
+        max-width: 60rem;
+      }
+
       .meta {
         display: flex;
         flex-wrap: wrap;
         gap: 0.75rem;
-        margin-top: 1.1rem;
+        margin-top: 1rem;
       }
 
       .badge {
@@ -83,11 +109,11 @@
         color: var(--muted);
         border-radius: 999px;
         padding: 0.45rem 0.8rem;
-        font-size: 0.92rem;
+        font-size: 0.9rem;
       }
 
       .panel {
-        padding: 1.1rem;
+        padding: 1.2rem;
       }
 
       .toolbar {
@@ -101,7 +127,8 @@
 
       .toolbar h2 {
         margin: 0;
-        font-size: 1.15rem;
+        font-size: 1.18rem;
+        color: var(--gravitas);
       }
 
       .toolbar-actions {
@@ -118,16 +145,27 @@
       }
 
       button {
-        border: 0;
+        border: 1px solid var(--berry);
         border-radius: 10px;
         background: var(--accent);
         color: white;
         font-weight: 700;
-        padding: 0.7rem 1rem;
+        padding: 0.72rem 1.05rem;
         cursor: pointer;
+        transition: background-color 120ms ease, border-color 120ms ease, transform 120ms ease;
       }
 
-      button:hover { filter: brightness(1.05); }
+      button:hover {
+        background: var(--berry-dark);
+        border-color: var(--berry-dark);
+        transform: translateY(-1px);
+      }
+
+      button:focus-visible,
+      a:focus-visible {
+        outline: 3px solid rgba(238, 12, 93, 0.28);
+        outline-offset: 2px;
+      }
 
       .status {
         font-size: 0.94rem;
@@ -141,8 +179,8 @@
 
       .empty-state,
       .error-state {
-        border: 1px dashed var(--border);
-        border-radius: 16px;
+        border: 1px solid var(--border);
+        border-radius: 14px;
         padding: 1.25rem;
         background: var(--panel-muted);
       }
@@ -160,10 +198,15 @@
         border-color: var(--warning-border);
       }
 
+      .error-state {
+        background: #fff4f7;
+        border-color: #f0c7d6;
+      }
+
       .table-wrap {
         overflow-x: auto;
         border: 1px solid var(--border);
-        border-radius: 16px;
+        border-radius: 14px;
       }
 
       table {
@@ -185,7 +228,11 @@
         text-transform: uppercase;
         letter-spacing: 0.05em;
         color: var(--muted);
-        background: #f8fbff;
+        background: #f7f3f6;
+      }
+
+      tbody tr:nth-child(even) {
+        background: #fcfafb;
       }
 
       tr:last-child td { border-bottom: 0; }
@@ -196,7 +243,10 @@
         font-weight: 700;
       }
 
-      a:hover { text-decoration: underline; }
+      a:hover {
+        color: var(--berry-dark);
+        text-decoration: underline;
+      }
 
       .filename {
         display: flex;
@@ -229,21 +279,25 @@
   <body>
     <main class="page">
       <section class="hero">
-        <div class="eyebrow">📄 Report index</div>
-        <h1>Check Point CoPilot Reports</h1>
-        <p>
-          This page shows every report currently available in <code>reports/</code>.
-          The table below is populated dynamically from the local report server.
-        </p>
-        <div class="meta">
-          <span class="badge" id="reportCount">Checking reports…</span>
-          <span class="badge" id="lastUpdated">Last updated: pending</span>
+        <div class="hero-top">
+          <div class="eyebrow">Report index</div>
+          <h1>Check Point CoPilot Reports</h1>
+          <p>
+            A structured index of generated HTML reports for operational analysis,
+            executive review, and internal cybersecurity reporting.
+          </p>
         </div>
-        <ul class="helper-list">
-          <li>Generate HTML reports into <code>reports/</code>.</li>
-          <li>Use descriptive filenames such as <code>threat-prevention-review-2026-04-14.html</code>.</li>
-          <li>Do not include raw secrets or credentials in report content.</li>
-        </ul>
+        <div class="hero-body">
+          <div class="meta">
+            <span class="badge" id="reportCount">Checking reports…</span>
+            <span class="badge" id="lastUpdated">Last updated: pending</span>
+          </div>
+          <ul class="helper-list">
+            <li>Generate HTML reports into <code>reports/</code>.</li>
+            <li>Use descriptive filenames such as <code>threat-prevention-review-2026-04-14.html</code>.</li>
+            <li>Do not include raw secrets or credentials in report content.</li>
+          </ul>
+        </div>
       </section>
 
       <section class="panel">

@@ -12,6 +12,7 @@ Core operating rules:
 - Prefer the configured Check Point MCP servers over direct raw API calls.
 - Use `management`, `management-logs`, `threat-prevention`, `https-inspection`, and `documentation-tool` as primary evidence sources whenever available.
 - If the `checkpoint-copilot` skill is available, load and follow it at the beginning of Check Point-focused work.
+- If the task involves HTML reports, dashboards, or web UI, load and follow the `checkpoint-brand-webui` skill when available.
 - Do not use direct `curl`, ad-hoc Python requests, or raw Check Point management API calls unless the user explicitly requests raw API troubleshooting or the MCP path is unavailable and you clearly say so.
 - Clearly distinguish facts, inferences, and recommendations.
 - Ask before proposing production-impacting changes.
