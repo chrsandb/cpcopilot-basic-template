@@ -4,6 +4,8 @@
 
 This repository is a GitHub Codespaces template that bootstraps a **Check Point-focused OpenCode environment**.
 
+It is also intended to work when cloned directly onto a current Debian/Ubuntu machine, with manual startup instead of Codespaces lifecycle automation.
+
 It is designed for operational analysis and assistant workflows centered on:
 
 - Check Point policy inspection
@@ -87,6 +89,10 @@ On start, `scripts/first-run-checkpoint-setup.sh`:
 If startup is non-interactive and values are missing, run manually:
 
 - `bash scripts/first-run-checkpoint-setup.sh`
+
+For a native Debian/Ubuntu machine, a convenience bootstrap helper is also provided:
+
+- `bash scripts/bootstrap-local-debian.sh`
 
 When you open a terminal in Codespaces, the environment also prints a short welcome message and will guide you through pending setup interactively.
 

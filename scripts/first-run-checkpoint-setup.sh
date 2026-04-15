@@ -179,7 +179,7 @@ prompt_with_default "REPORTS_PORT" "Optional reports port" "8081"
 
 {
 cat <<EOF
-# User-scoped secrets/state for Check Point OpenCode Codespaces setup.
+# User-scoped secrets/state for Check Point OpenCode setup.
 # File permissions are restricted and this file is intentionally not tracked by git.
 EOF
 write_env_line "CHECKPOINT_MGMT_HOST" "${CHECKPOINT_MGMT_HOST}"
@@ -254,7 +254,7 @@ cat > "${STATUS_FILE}" <<EOF
 EOF
 
 echo ""
-echo "===== Check Point Codespace Setup Summary (redacted) ====="
+echo "===== Check Point OpenCode Setup Summary (redacted) ====="
 echo "Management auth mode     : $( [[ -n "${CHECKPOINT_API_KEY}" ]] && echo "api-key" || echo "username/password" )"
 echo "Management host         : $(redact "${CHECKPOINT_MGMT_HOST}")"
 echo "Management API key      : $(redact "${CHECKPOINT_API_KEY}")"
@@ -271,7 +271,7 @@ echo "Setup complete          : ${setup_complete}"
 
 echo ""
 if [[ "${setup_complete}" != "true" ]]; then
-  echo "[setup] Setup is incomplete. Add missing Codespaces secrets and re-run: bash scripts/first-run-checkpoint-setup.sh"
+  echo "[setup] Setup is incomplete. Add the missing environment values and re-run: bash scripts/first-run-checkpoint-setup.sh"
 fi
 
 rm -f "${BASE_CONFIG_JSON}"

@@ -13,12 +13,12 @@ SHELL_HOOK_FILE="${OPENCODE_CONFIG_DIR}/checkpoint-shell-hook.sh"
 mkdir -p "${NPM_GLOBAL_DIR}/bin" "${OPENCODE_CONFIG_DIR}" "${SKILLS_DEST_DIR}" "${HOME}/.local/state/checkpoint-copilot"
 
 if ! command -v node >/dev/null 2>&1 || ! command -v npm >/dev/null 2>&1; then
-  echo "[setup] Node.js/npm are required but not found. Ensure devcontainer build installs Node 20+."
+  echo "[setup] Node.js/npm are required but not found. Install Node.js 20+ manually or run scripts/bootstrap-local-debian.sh on Debian/Ubuntu."
   exit 1
 fi
 
 if ! command -v jq >/dev/null 2>&1; then
-  echo "[setup] jq is required but not found. Ensure the devcontainer image installs jq."
+  echo "[setup] jq is required but not found. Install jq manually or run scripts/bootstrap-local-debian.sh on Debian/Ubuntu."
   exit 1
 fi
 

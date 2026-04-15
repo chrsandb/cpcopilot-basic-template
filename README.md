@@ -2,6 +2,8 @@
 
 Template repository for spinning up a Check Point-focused OpenCode environment in GitHub Codespaces.
 
+It also supports running directly on a current Debian/Ubuntu machine outside Codespaces with a more manual startup flow.
+
 > ✅ **First-run success target:** after Codespace startup, both OpenCode (`4096`) and reports (`8081`) are reachable and setup status prints `complete`.
 
 When a Codespace starts from this template, it:
@@ -74,6 +76,24 @@ If secrets are missing and startup is non-interactive, setup remains pending and
 
 - `bash scripts/first-run-checkpoint-setup.sh`
 
+## Local Debian/Ubuntu usage
+
+For a native Debian/Ubuntu machine outside Codespaces:
+
+1. Clone the repository.
+2. Run `bash scripts/bootstrap-local-debian.sh` to install prerequisites and prepare the OpenCode runtime.
+3. Run `bash scripts/first-run-checkpoint-setup.sh` to enter or confirm the required environment values.
+4. Start the services:
+  - `bash scripts/start-opencode-web.sh`
+  - `bash scripts/start-report-server.sh`
+
+Default local URLs:
+
+- OpenCode Web UI: `http://localhost:4096`
+- HTML reports server: `http://localhost:8081`
+
+The shell hook and guided setup also work locally when you open a new interactive bash shell from the repository root.
+
 ## Access URLs in Codespaces
 
 - OpenCode Web UI: forwarded `4096`
@@ -95,7 +115,7 @@ The local report server publishes this directory for easy sharing/review within 
 ## Security notes
 
 - No real credentials are stored in this repository.
-- Secrets are resolved from Codespaces environment variables and stored only in user-scoped runtime files under `~/.config/opencode`.
+- Secrets can come from Codespaces secrets, normal environment variables, or the guided setup prompts, and are stored only in user-scoped runtime files under `~/.config/opencode`.
 - Validation output is redacted and does not print secrets.
 
 ## Quick troubleshooting
@@ -103,12 +123,12 @@ The local report server publishes this directory for easy sharing/review within 
 ### Setup shows `pending`
 
 - Cause: one or more mandatory secrets are missing.
-- Fix: add missing Codespaces secrets and run `bash scripts/first-run-checkpoint-setup.sh`.
+- Fix: add the missing environment values and run `bash scripts/first-run-checkpoint-setup.sh`.
 
 ### OpenCode UI is not reachable
 
 - Cause: OpenCode process did not start or port forwarding was not opened yet.
-- Fix: run `bash scripts/post-attach.sh` or `bash scripts/start-opencode-web.sh`, then open forwarded port `4096` from the Codespaces Ports panel.
+- Fix: run `bash scripts/start-opencode-web.sh`, then open the preferred URL printed in the terminal (forwarded in Codespaces, localhost elsewhere).
 
 ### Reports URL is not reachable
 
@@ -118,7 +138,7 @@ The local report server publishes this directory for easy sharing/review within 
 ### MCP checks feel slow at OpenCode startup
 
 - Cause: MCP packages may not be locally installed/cached yet.
-- Fix: rebuild the Codespace or run `bash scripts/setup-opencode.sh` once. This template now installs the Check Point MCP packages locally and launches them via local binaries instead of `npx -y`.
+- Fix: rerun `bash scripts/setup-opencode.sh` once, or `bash scripts/bootstrap-local-debian.sh` on Debian/Ubuntu. This template installs the Check Point MCP packages locally and launches them via local binaries instead of `npx -y`.
 
 ### Big Pickle is configured but OpenCode still asks for provider setup
 

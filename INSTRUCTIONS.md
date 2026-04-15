@@ -1,20 +1,20 @@
 # Check Point CoPilot — User Instructions
 
-Welcome to the Check Point-focused OpenCode Codespace.
+Welcome to the Check Point-focused OpenCode environment for Codespaces or local Linux.
 
 ## What to do first
 
-1. Open the first visible bash terminal in the Codespace.
+1. In Codespaces, open the first visible bash terminal. On local Linux, open a bash shell in the repository root.
 2. Complete the guided setup shown in that terminal if prompted.
-3. After setup finishes, OpenCode and the reports server are started for you.
-4. Open the forwarded **OpenCode Web UI** port: `4096`
-5. Open the forwarded **HTML Reports** port: `8081`
+3. After setup finishes, OpenCode and the reports server are started for you in Codespaces; on local Linux start them with `bash scripts/start-opencode-web.sh` and `bash scripts/start-report-server.sh`.
+4. Open the **OpenCode Web UI** on port `4096`.
+5. Open the **HTML Reports** server on port `8081`.
 
 When running inside GitHub Codespaces, the terminal welcome flow prints the forwarded URLs directly using the documented `CODESPACE_NAME` and `GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN` environment variables. Outside Codespaces, it prints `localhost` URLs instead.
 
 ## Required secrets
 
-Set these as GitHub Codespaces secrets for the repository or your account:
+Set these as environment variables or provide them during guided setup. In Codespaces, repository/user Codespaces secrets work well:
 
 - `CHECKPOINT_MGMT_HOST`
 - `CHECKPOINT_API_KEY` (optional; preferred when available)
@@ -35,7 +35,7 @@ Optional values that guided setup will also ask for if missing:
 
 ## What this environment is optimized for
 
-Use this Codespace primarily for:
+Use this environment primarily for:
 
 - Check Point policy inspection
 - object and rule review
@@ -82,6 +82,7 @@ Important:
 
 ## Useful local commands
 
+- Debian/Ubuntu bootstrap: `bash scripts/bootstrap-local-debian.sh`
 - Guided setup: `bash scripts/first-run-checkpoint-setup.sh`
 - Start OpenCode: `bash scripts/start-opencode-web.sh`
 - Start reports server: `bash scripts/start-report-server.sh`
