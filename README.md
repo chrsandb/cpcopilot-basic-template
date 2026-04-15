@@ -16,6 +16,7 @@ The easiest way to use this repository for a demo is to use Check Point SmartCon
 2. Click "Next" to start a new demo session or use an existing one.
 3. Click "Login" to enter the demo environment.
 4. Once logged in, you can access the Check Point management server details by going to the middle of the button bar and clicking on "Cloud Demo Server". Select "Demo Server Information" to copy the server DNS name or IP address.
+  - Note: We have seen issues using the DNS name in some environments, so the IP address is currently recommended.
 5. For simplicity, we will use the default demo credentials below, but you can also create a new user with an API key and publish the changes.
    - Username: `admin`
    - Password: `demo123`
