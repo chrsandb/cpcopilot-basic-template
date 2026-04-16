@@ -15,7 +15,12 @@ import os
 REPO_ROOT = Path(__file__).resolve().parent.parent
 REPORTS_ROOT = REPO_ROOT / "reports"
 HOST = "0.0.0.0"
-PORT = int(os.environ.get("REPORTS_PORT", "8081"))
+try:
+    PORT = int(os.environ.get("REPORTS_PORT", "8081"))
+    if not 1 <= PORT <= 65535:
+        raise ValueError("port out of range")
+except (ValueError, TypeError):
+    PORT = 8081
 
 
 class ReportRequestHandler(SimpleHTTPRequestHandler):
@@ -38,7 +43,6 @@ class ReportRequestHandler(SimpleHTTPRequestHandler):
         self.send_response(HTTPStatus.OK)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(body)))
-        self.send_header("Cache-Control", "no-store")
         self.end_headers()
         self.wfile.write(body)
 
@@ -53,7 +57,12 @@ class ReportRequestHandler(SimpleHTTPRequestHandler):
     def send_head(self):
         parsed = urlparse(self.path)
         if parsed.path == "/":
+            saved_path = self.path
             self.path = "/index.html"
+            try:
+                return super().send_head()
+            finally:
+                self.path = saved_path
         return super().send_head()
 
     def translate_path(self, path):

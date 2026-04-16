@@ -34,6 +34,13 @@ cd "${REPO_ROOT}"
 nohup python3 "${REPO_ROOT}/scripts/report_server.py" >"${LOG_FILE}" 2>&1 &
 echo $! > "${PID_FILE}"
 
+sleep 1
+if ! kill -0 "$(cat "${PID_FILE}")" 2>/dev/null; then
+  echo "[reports] ERROR: process failed to start. Last log output:" >&2
+  tail -20 "${LOG_FILE}" >&2
+  exit 1
+fi
+
 echo "[reports] server started on 0.0.0.0:${REPORTS_PORT}."
 echo "[reports] preferred URL: ${PREFERRED_URL}"
 if [[ "${PREFERRED_URL}" != "${LOCAL_URL}" ]]; then

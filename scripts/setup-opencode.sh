@@ -45,7 +45,7 @@ npm install -g \
   @chkp/documentation-mcp >/dev/null
 
 if [[ -d "${SKILLS_SRC_DIR}" ]]; then
-  find "${SKILLS_SRC_DIR}" -mindepth 1 -maxdepth 1 -type d | while read -r skill_dir; do
+  find "${SKILLS_SRC_DIR}" -mindepth 1 -maxdepth 1 -type d -print0 | while IFS= read -r -d '' skill_dir; do
     skill_name="$(basename "${skill_dir}")"
     if [[ -f "${skill_dir}/SKILL.md" ]]; then
       mkdir -p "${SKILLS_DEST_DIR}/${skill_name}"

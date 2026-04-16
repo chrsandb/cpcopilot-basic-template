@@ -27,6 +27,7 @@ def read_masked(prompt_text: str, default_value: str = "") -> str:
         return default_value
 
     buffer: list[str] = []
+    byte_buf: bytes = b""
     raw_enabled = False
 
     try:
@@ -55,9 +56,11 @@ def read_masked(prompt_text: str, default_value: str = "") -> str:
                     buffer.pop()
                     sys.stderr.write("\b \b")
                     sys.stderr.flush()
+                byte_buf = b""
                 continue
 
             if char == b"\x1b":
+                byte_buf = b""
                 while True:
                     ready, _, _ = select.select([fd], [], [], 0.01)
                     if not ready:
@@ -65,9 +68,15 @@ def read_masked(prompt_text: str, default_value: str = "") -> str:
                     os.read(fd, 1)
                 continue
 
+            byte_buf += char
             try:
-                decoded = char.decode("utf-8")
+                decoded = byte_buf.decode("utf-8")
+                byte_buf = b""
             except UnicodeDecodeError:
+                # Incomplete multi-byte sequence; keep accumulating until valid
+                # or discard after 4 bytes (longest valid UTF-8 sequence)
+                if len(byte_buf) > 4:
+                    byte_buf = b""
                 continue
 
             if decoded.isprintable():

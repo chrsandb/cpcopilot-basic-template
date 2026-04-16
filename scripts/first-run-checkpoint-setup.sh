@@ -17,6 +17,10 @@ DEFAULT_OPENCODE_PASSWORD=""
 
 mkdir -p "${OPENCODE_CONFIG_DIR}" "${HOME}/.local/state/checkpoint-copilot"
 
+BASE_CONFIG_JSON=""
+MERGED_JSON=""
+trap 'rm -f "${BASE_CONFIG_JSON}" "${MERGED_JSON}"' EXIT
+
 if [[ -f "${USER_ENV_FILE}" ]]; then
   set -a
   # shellcheck source=/dev/null
@@ -313,6 +317,7 @@ cat > "${STATUS_FILE}" <<EOF
   "reportsPort": "${REPORTS_PORT}"
 }
 EOF
+chmod 600 "${STATUS_FILE}"
 
 echo ""
 echo "===== Check Point OpenCode Setup Summary (redacted) ====="
@@ -341,4 +346,4 @@ if [[ "${setup_complete}" != "true" ]]; then
   echo "[setup] Setup is incomplete. Add the missing environment values and re-run: bash scripts/first-run-checkpoint-setup.sh"
 fi
 
-rm -f "${BASE_CONFIG_JSON}"
+# Temp files are cleaned up by the EXIT trap

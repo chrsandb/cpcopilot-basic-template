@@ -44,7 +44,7 @@ read_proc_env_value() {
     return 1
   fi
 
-  tr '\0' '\n' < "/proc/${pid}/environ" | sed -n "s/^${key}=//p" | head -n 1
+  tr '\0' '\n' < "/proc/${pid}/environ" | grep "^${key}=" | head -n 1 | cut -d= -f2-
 }
 
 if [[ -f "${PID_FILE}" ]] && kill -0 "$(cat "${PID_FILE}")" 2>/dev/null; then
@@ -67,6 +67,13 @@ rm -f "${STATE_DIR}/opencode-intro-seeded" "${STATE_DIR}/opencode-intro-session.
 cd "${REPO_ROOT}"
 nohup env -C "${REPO_ROOT}" opencode web --hostname 0.0.0.0 --port "${OPENCODE_PORT}" </dev/null >"${LOG_FILE}" 2>&1 &
 echo $! > "${PID_FILE}"
+
+sleep 1
+if ! kill -0 "$(cat "${PID_FILE}")" 2>/dev/null; then
+  echo "[opencode] ERROR: process failed to start. Last log output:" >&2
+  tail -20 "${LOG_FILE}" >&2
+  exit 1
+fi
 
 echo "[opencode] web mode started on 0.0.0.0:${OPENCODE_PORT}."
 echo "[opencode] preferred URL: ${PREFERRED_URL}"

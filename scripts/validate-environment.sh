@@ -45,6 +45,9 @@ check_cmd node
 check_cmd npm
 check_cmd npx
 check_cmd jq
+if command -v jq >/dev/null 2>&1; then
+  HAS_JQ=true
+fi
 check_cmd python3
 check_cmd opencode
 
@@ -55,10 +58,6 @@ for mcp_bin in quantum-management-mcp spark-management-mcp management-logs-mcp t
     fail "${mcp_bin} is not installed locally"
   fi
 done
-
-if command -v jq >/dev/null 2>&1; then
-  HAS_JQ=true
-fi
 
 if [[ -f "${REPO_ROOT}/.devcontainer/devcontainer.json" ]]; then
   pass "devcontainer config exists"
