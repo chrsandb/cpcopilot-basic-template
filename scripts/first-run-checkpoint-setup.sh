@@ -264,7 +264,11 @@ fi
 
 prompt_with_default "OPENCODE_SERVER_USERNAME" "OpenCode web user username" "${DEFAULT_OPENCODE_USERNAME}"
 if [[ -n "${OPENCODE_SERVER_PASSWORD}" ]]; then
-  prompt_secret_with_default "OPENCODE_SERVER_PASSWORD" "OpenCode web user password (press Enter to clear and disable auth)"
+  if [[ "${is_interactive}" == "true" ]]; then
+    local_pw=""
+    read_masked_secret "OpenCode web user password (press Enter to clear and disable auth; type new value to change)" local_pw
+    OPENCODE_SERVER_PASSWORD="${local_pw}"
+  fi
 else
   prompt_secret_with_default "OPENCODE_SERVER_PASSWORD" "OpenCode web user password (press Enter to disable auth)" "${DEFAULT_OPENCODE_PASSWORD}"
 fi
@@ -373,7 +377,7 @@ echo "Management username     : $( [[ -n "${CHECKPOINT_MGMT_URL}" ]] && echo "<n
 echo "Management password     : $( [[ -n "${CHECKPOINT_MGMT_URL}" ]] && echo "<not used>" || redact "${CHECKPOINT_PASSWORD}" )"
 echo "Doc CLIENT_ID           : $(redact "${CHECKPOINT_DOC_CLIENT_ID}")"
 echo "Doc SECRET_KEY          : $(redact "${CHECKPOINT_DOC_SECRET_KEY}")"
-echo "Doc REGION              : $(redact "${CHECKPOINT_DOC_REGION}")"
+echo "Doc REGION              : ${CHECKPOINT_DOC_REGION:-<missing>}"
 echo "Doc AUTH_URL            : $(redact "${CHECKPOINT_DOC_AUTH_URL}")"
 echo "OpenCode auth           : $( [[ -n "${OPENCODE_SERVER_PASSWORD}" ]] && echo "enabled" || echo "disabled" )"
 echo "OpenCode username       : $(redact "${OPENCODE_SERVER_USERNAME}")"
