@@ -28,10 +28,10 @@
       "description": "Secret key for the Check Point documentation MCP"
     },
     "OPENCODE_SERVER_USERNAME": {
-      "description": "Basic-auth username for OpenCode web mode (defaults to admin if left blank during setup)"
+      "description": "Username for OpenCode web mode (defaults to opencode if left blank during setup)"
     },
     "OPENCODE_SERVER_PASSWORD": {
-      "description": "Basic-auth password for OpenCode web mode (defaults to demo123 if left blank during setup)"
+      "description": "Password for OpenCode web mode (defaults to blank if left blank during setup, which disables auth)"
     }
   },
   "portsAttributes": {

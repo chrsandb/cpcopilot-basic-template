@@ -71,8 +71,8 @@ Optional values if you need to override defaults:
 - `CHECKPOINT_MGMT_PORT` (default `443`)
 - `CHECKPOINT_DOC_REGION` (default `EU`)
 - `CHECKPOINT_DOC_AUTH_URL`
-- `OPENCODE_SERVER_USERNAME` (default `admin`)
-- `OPENCODE_SERVER_PASSWORD` (default `demo123`)
+- `OPENCODE_SERVER_USERNAME` (default `opencode`)
+- `OPENCODE_SERVER_PASSWORD` (default blank, which disables OpenCode Web UI auth)
 - `OPENCODE_PORT` (default `4096`)
 - `REPORTS_PORT` (default `8081`)
 

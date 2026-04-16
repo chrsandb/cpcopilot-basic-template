@@ -7,7 +7,7 @@ Welcome to the Check Point-focused OpenCode environment for Codespaces or local 
 1. Complete the guided setup shown in the terminal if prompted. This will ask you for the required values to connect to the Check Point management server and to configure the OpenCode and reports servers. If you have already set these values as Codespaces secrets, they will already be available to the setup script, so you may be able to continue with little or no input.
 2. After setup finishes, OpenCode and the reports server start automatically for you in Codespaces.
 3. Open the Reports link shown in the terminal. It should be empty at first because you have not generated any reports yet.
-4. Open the OpenCode link shown in the terminal and log in with the credentials you provided during setup (default: `admin` / `demo123`).
+4. Open the OpenCode link shown in the terminal. By default, OpenCode starts without a login prompt. If you provided a non-empty OpenCode password during setup, log in with the credentials you configured (default username: `opencode`).
 5. In the OpenCode browser tab, select the session for this repository to open the chat. It is usually named after the repository (for example, `cpcopilot-basic`).
    - In the OpenCode Web UI, you can close the right-side pane to make more room for the conversation by clicking the second icon at the top of that pane.
    - In the OpenCode Web UI, you can also click the icon in the top-left corner to open the sessions list and switch between sessions later.

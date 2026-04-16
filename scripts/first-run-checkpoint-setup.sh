@@ -12,8 +12,8 @@ MCP_FRAGMENT_FILE="${REPO_ROOT}/templates/opencode/checkpoint-mcp-fragment.json"
 
 DEFAULT_CHECKPOINT_USERNAME="admin"
 DEFAULT_CHECKPOINT_PASSWORD="demo123"
-DEFAULT_OPENCODE_USERNAME="admin"
-DEFAULT_OPENCODE_PASSWORD="demo123"
+DEFAULT_OPENCODE_USERNAME="opencode"
+DEFAULT_OPENCODE_PASSWORD=""
 
 mkdir -p "${OPENCODE_CONFIG_DIR}" "${HOME}/.local/state/checkpoint-copilot"
 
@@ -196,7 +196,7 @@ prompt_with_default "CHECKPOINT_DOC_REGION" "Optional documentation REGION" "EU"
 prompt_if_missing "CHECKPOINT_DOC_AUTH_URL" "Optional documentation AUTH_URL (press Enter to skip):"
 
 prompt_with_default "OPENCODE_SERVER_USERNAME" "OpenCode web user username" "${DEFAULT_OPENCODE_USERNAME}"
-prompt_secret_with_default "OPENCODE_SERVER_PASSWORD" "OpenCode web user password" "${DEFAULT_OPENCODE_PASSWORD}"
+prompt_secret_with_default "OPENCODE_SERVER_PASSWORD" "OpenCode web user password (press Enter to disable auth)" "${DEFAULT_OPENCODE_PASSWORD}"
 prompt_with_default "OPENCODE_PORT" "Optional OpenCode web port" "4096"
 prompt_with_default "REPORTS_PORT" "Optional reports port" "8081"
 
@@ -287,8 +287,9 @@ echo "Doc CLIENT_ID           : $(redact "${CHECKPOINT_DOC_CLIENT_ID}")"
 echo "Doc SECRET_KEY          : $(redact "${CHECKPOINT_DOC_SECRET_KEY}")"
 echo "Doc REGION              : $(redact "${CHECKPOINT_DOC_REGION}")"
 echo "Doc AUTH_URL            : $(redact "${CHECKPOINT_DOC_AUTH_URL}")"
+echo "OpenCode auth           : $( [[ -n "${OPENCODE_SERVER_PASSWORD}" ]] && echo "enabled" || echo "disabled" )"
 echo "OpenCode username       : $(redact "${OPENCODE_SERVER_USERNAME}")"
-echo "OpenCode password       : $(redact "${OPENCODE_SERVER_PASSWORD}")"
+echo "OpenCode password       : $( [[ -n "${OPENCODE_SERVER_PASSWORD}" ]] && redact "${OPENCODE_SERVER_PASSWORD}" || echo "<disabled>" )"
 echo "OpenCode config file    : ${OPENCODE_CONFIG_FILE}"
 echo "Setup complete          : ${setup_complete}"
 
