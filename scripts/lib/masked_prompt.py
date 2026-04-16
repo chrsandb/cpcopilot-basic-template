@@ -17,7 +17,15 @@ def read_masked(prompt_text: str, default_value: str = "") -> str:
         tty_in = sys.stdin
 
     fd = tty_in.fileno()
-    old_settings = termios.tcgetattr(fd)
+
+    if not os.isatty(fd):
+        return default_value
+
+    try:
+        old_settings = termios.tcgetattr(fd)
+    except (termios.error, OSError, ValueError):
+        return default_value
+
     buffer: list[str] = []
     raw_enabled = False
 
@@ -92,6 +100,9 @@ def main() -> int:
     except KeyboardInterrupt:
         sys.stderr.write("\n")
         return 130
+    except Exception as exc:  # pragma: no cover - defensive fallback for terminal quirks
+        sys.stderr.write(f"masked_prompt.py: {exc}\n")
+        return 1
 
     sys.stdout.write(value)
     return 0

@@ -48,8 +48,24 @@ read_masked_secret() {
   local result_var_name="$2"
   local default_value="${3:-}"
   local input_value=""
+  local status=0
 
-  input_value="$(python3 "${REPO_ROOT}/scripts/lib/masked_prompt.py" "${prompt_text}" "${default_value}")"
+  if ! input_value="$(python3 "${REPO_ROOT}/scripts/lib/masked_prompt.py" "${prompt_text}" "${default_value}")"; then
+    status=$?
+    if [[ ${status} -eq 130 ]]; then
+      return ${status}
+    fi
+
+    if [[ -n "${default_value}" ]]; then
+      input_value="${default_value}"
+    else
+      return ${status}
+    fi
+  fi
+
+  if [[ -z "${input_value}" && -n "${default_value}" ]]; then
+    input_value="${default_value}"
+  fi
 
   printf -v "${result_var_name}" '%s' "${input_value}"
 }
