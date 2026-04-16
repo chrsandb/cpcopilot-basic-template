@@ -9,6 +9,7 @@ It is also intended to work when cloned directly onto a current Debian/Ubuntu ma
 It is designed for operational analysis and assistant workflows centered on:
 
 - Check Point policy inspection
+- Spark gateway and appliance management analysis
 - object and rule review
 - management logs investigation
 - threat prevention analysis
@@ -42,6 +43,8 @@ Startup command pattern:
 - `opencode web --hostname 0.0.0.0 --port ${OPENCODE_PORT}`
 
 `OPENCODE_SERVER_USERNAME` and `OPENCODE_SERVER_PASSWORD` are honored if provided.
+
+The configured Check Point MCP set also includes `spark-management`, which reuses the documentation portal credentials already collected during setup.
 
 ## How to open the OpenCode Web UI
 
@@ -109,6 +112,10 @@ For best results, include:
 - desired output format (summary table, prioritized findings, HTML report)
 
 ## Example prompts
+
+### Spark management
+
+- "List all managed Spark gateways and highlight anything disconnected, stale, or needing attention."
 
 ### Policy inspection
 

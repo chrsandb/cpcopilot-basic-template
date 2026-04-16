@@ -59,6 +59,17 @@
         "AUTH_URL": "{env:CHECKPOINT_DOC_AUTH_URL}",
         "REGION": "{env:CHECKPOINT_DOC_REGION}"
       }
+    },
+    "spark-management": {
+      "type": "local",
+      "enabled": true,
+      "command": ["{env:HOME}/.local/npm-global/bin/spark-management-mcp"],
+      "environment": {
+        "CLIENT_ID": "{env:CHECKPOINT_DOC_CLIENT_ID}",
+        "SECRET_KEY": "{env:CHECKPOINT_DOC_SECRET_KEY}",
+        "INFINITY_PORTAL_URL": "{env:CHECKPOINT_DOC_AUTH_URL}",
+        "REGION": "{env:CHECKPOINT_DOC_REGION}"
+      }
     }
   }
 }

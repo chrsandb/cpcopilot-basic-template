@@ -48,7 +48,7 @@ check_cmd jq
 check_cmd python3
 check_cmd opencode
 
-for mcp_bin in quantum-management-mcp management-logs-mcp threat-prevention-mcp https-inspection-mcp documentation-mcp; do
+for mcp_bin in quantum-management-mcp spark-management-mcp management-logs-mcp threat-prevention-mcp https-inspection-mcp documentation-mcp; do
   if [[ -x "${NPM_GLOBAL_BIN}/${mcp_bin}" ]]; then
     pass "${mcp_bin} is installed locally"
   else
@@ -132,7 +132,7 @@ fi
 
 if [[ -f "${REPO_ROOT}/templates/opencode/checkpoint-mcp-fragment.json" ]]; then
   if [[ "${HAS_JQ}" == "true" ]]; then
-    for srv in management management-logs threat-prevention https-inspection documentation-tool; do
+    for srv in management spark-management management-logs threat-prevention https-inspection documentation-tool; do
       if jq -e --arg s "$srv" '.mcp[$s]' "${REPO_ROOT}/templates/opencode/checkpoint-mcp-fragment.json" >/dev/null 2>&1; then
         pass "MCP entry exists for ${srv}"
       else

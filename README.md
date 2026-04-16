@@ -29,6 +29,8 @@ The easiest way to use this repository for a demo is to use Check Point SmartCon
 
 You will also need to create a free Check Point documentation tool service account to get the required client ID and secret key for documentation lookups.
 
+Those same documentation portal credentials are also used by the Spark Management MCP server, so no extra interactive setup is required for Spark support.
+
 1. Navigate to https://portal.checkpoint.com/ and log in with your account.
 2. Select an account/tenant where you are an administrator.
 3. Click the cog-wheel settings icon in the middle of the top bar.
@@ -100,6 +102,7 @@ Outside Codespaces, the startup scripts prefer the machine's local network IP an
 - reports server on port `8081`
 - Check Point MCP packages:
   - `@chkp/quantum-management-mcp`
+  - `@chkp/spark-management-mcp`
   - `@chkp/management-logs-mcp`
   - `@chkp/threat-prevention-mcp`
   - `@chkp/https-inspection-mcp`

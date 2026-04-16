@@ -38,6 +38,7 @@ echo "[setup] Installing/updating OpenCode and Check Point MCP packages..."
 npm install -g \
   opencode-ai@latest \
   @chkp/quantum-management-mcp \
+  @chkp/spark-management-mcp \
   @chkp/management-logs-mcp \
   @chkp/threat-prevention-mcp \
   @chkp/https-inspection-mcp \
