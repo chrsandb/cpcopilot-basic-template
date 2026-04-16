@@ -48,35 +48,85 @@ read_masked_secret() {
   local result_var_name="$2"
   local default_value="${3:-}"
   local input_value=""
-  local char=""
 
-  if [[ -n "${default_value}" ]]; then
-    printf '%s [%s] ' "${prompt_text}" "${default_value}"
-  else
-    printf '%s ' "${prompt_text}"
-  fi
+  input_value="$({ python3 - "${prompt_text}" "${default_value}" <<'PY'
+import os
+import select
+import sys
+import termios
+import tty
 
-  while IFS= read -r -s -n 1 char; do
-    if [[ "${char}" == $'\n' || "${char}" == $'\r' ]]; then
-      break
-    fi
+prompt_text = sys.argv[1]
+default_value = sys.argv[2]
 
-    if [[ "${char}" == $'\177' || "${char}" == $'\b' || "${char}" == $'\x7f' ]]; then
-      if [[ -n "${input_value}" ]]; then
-        input_value="${input_value%?}"
-        printf '\b \b'
-      fi
-      continue
-    fi
+try:
+    tty_in = open('/dev/tty', 'r', encoding='utf-8', newline='')
+except OSError:
+    tty_in = sys.stdin
 
-    input_value+="${char}"
-    printf '*'
-  done
-  echo
+fd = tty_in.fileno()
+old_settings = termios.tcgetattr(fd)
+buffer = []
 
-  if [[ -z "${input_value}" && -n "${default_value}" ]]; then
-    input_value="${default_value}"
-  fi
+try:
+    if default_value:
+        sys.stderr.write(f"{prompt_text} [{default_value}] ")
+    else:
+        sys.stderr.write(f"{prompt_text} ")
+    sys.stderr.flush()
+
+    tty.setraw(fd)
+
+    while True:
+        char = os.read(fd, 1)
+        if not char:
+            break
+
+        if char in (b'\r', b'\n'):
+            break
+
+        if char == b'\x03':
+            raise KeyboardInterrupt
+
+        if char in (b'\x7f', b'\x08'):
+            if buffer:
+                buffer.pop()
+                sys.stderr.write('\b \b')
+                sys.stderr.flush()
+            continue
+
+        if char == b'\x1b':
+            while True:
+                ready, _, _ = select.select([fd], [], [], 0.01)
+                if not ready:
+                    break
+                os.read(fd, 1)
+            continue
+
+        try:
+            decoded = char.decode('utf-8')
+        except UnicodeDecodeError:
+            continue
+
+        if decoded.isprintable():
+            buffer.append(decoded)
+            sys.stderr.write('*')
+            sys.stderr.flush()
+
+    sys.stderr.write('\n')
+    sys.stderr.flush()
+
+    value = ''.join(buffer)
+    if not value and default_value:
+        value = default_value
+
+    sys.stdout.write(value)
+finally:
+    termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+    if tty_in is not sys.stdin:
+        tty_in.close()
+PY
+  } 2>/dev/tty)"
 
   printf -v "${result_var_name}" '%s' "${input_value}"
 }
