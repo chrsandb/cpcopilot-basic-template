@@ -8,7 +8,7 @@ Welcome to the Check Point-focused OpenCode environment for Codespaces or local 
 2. After setup finishes, OpenCode and the reports server start automatically for you in Codespaces.
 3. Open the Reports link shown in the terminal. It should be empty at first because you have not generated any reports yet.
 4. Open the OpenCode link shown in the terminal. By default, OpenCode starts without a login prompt. If you provided a non-empty OpenCode password during setup, log in with the credentials you configured (default username: `opencode`).
-5. In the OpenCode browser tab, select the session for this repository to open the chat. It is usually named after the repository (for example, `cpcopilot-basic`).
+5. In the OpenCode browser tab, open a new session by clicking the recent project shown in the middle of the screen. It is usually named after the repository, such as `/workspaces/cpcopilot-basic-template`.
    - In the OpenCode Web UI, you can close the right-side pane to make more room for the conversation by clicking the second icon at the top of that pane.
    - In the OpenCode Web UI, you can also click the icon in the top-left corner to open the sessions list and switch between sessions later.
 6. Ask the `CheckPoint-copilot` agent questions or request reports about your Check Point environment, policies, logs, threat prevention, HTTPS inspection, and documentation, or just start with a simple "hey" to confirm that it's working.
@@ -17,13 +17,9 @@ Welcome to the Check Point-focused OpenCode environment for Codespaces or local 
 
 Here are some example prompts to try:
 
-- "List access policy layers"
-- "List my Spark gateways and summarize any management or connectivity issues you find."
-- "Why can't users in InternalZone access applications at www.block.com?"
-- "Review the rules in the Datacenter layer and evaluate PCI 4.0 compliance. Create a detailed HTML report with findings and recommendations."
-- "Inspect access policy for broad allow rules and summarize top risk findings."
 - "Summarize threat-prevention profiles and exceptions, then identify coverage gaps by severity."
 - "Generate an HTML report in reports/ with findings, sources used, and next steps."
+- "List my Spark gateways and summarize any management or connectivity issues you find."
 
 ## Tips
 
