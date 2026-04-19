@@ -11,7 +11,7 @@ Learning and lab use only. This repository is designed to support research, proo
 This environment works with:
 
 - GitHub Codespaces
-- native Debian/Ubuntu machines or VMs
+- Native Debian/Ubuntu machines, VMs or containers with Internet access and the ability to run the included startup scripts.
 
 It starts the OpenCode Web UI, installs the Check Point MCP tools, provides a Check Point-focused agent and skill set, and runs a web server for HTML reports created by OpenCode agents.
 

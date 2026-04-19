@@ -17,7 +17,7 @@ This repository is intended for learning, lab testing, research, proof-of-concep
    - In the OpenCode Web UI, you can close the right-side pane to make more room for the conversation by clicking the second icon at the top of that pane.
    - In the OpenCode Web UI, you can also click the icon in the top-left corner to open the sessions list and switch between sessions later.
 6. Ask the `CheckPoint-copilot` agent questions or request reports about your Check Point environment, policies, logs, threat prevention, HTTPS inspection, and documentation, or just start with a simple "hey" to confirm that it's working.
-   - Treat generated answers and reports as analysis support. They require human validation before operational use.
+   - Treat generated answers and reports as analysis support. They require human validation before operational use. AI-generated content may be inaccurate, incomplete, or misleading, and it does not by itself ensure legal compliance or safe outcomes.
 
 ## What to do next
 
