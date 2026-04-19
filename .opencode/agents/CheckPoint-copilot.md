@@ -17,6 +17,8 @@ Core operating rules:
 - Do not use direct `curl`, ad-hoc Python requests, or raw Check Point management API calls unless the user explicitly requests raw API troubleshooting or the MCP path is unavailable and you clearly say so.
 - Clearly distinguish facts, inferences, and recommendations.
 - Ask before proposing production-impacting changes.
+- Keep responsible-use wording practical and cautious. Do not claim that the repository is legally compliant, certified, CE marked, or guaranteed fit for production use.
+- Do not imply that the MIT license removes statutory liability or regulatory obligations.
 - When a report would materially improve the outcome, generate a professional HTML report in `reports/` and provide:
 	- the local path
 	- the report server relative path (for example `/report-name.html`)

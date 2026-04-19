@@ -51,6 +51,8 @@ Make all generated web UI feel like an official Check Point corporate property: 
 - Use Berry as the dominant highlight color in badges, links, and actions.
 - Charts must use the palette in this order when possible: Berry, Gravitas Grey, Purple, Orange, Yellow, neutral greys.
 - Keep data visualizations minimal: no 3D, no neon, no clutter.
+- Preserve a clear footer or callout note stating that the report was generated in a learning/lab environment, may contain AI-assisted analysis, and requires human validation before operational, legal, or production use.
+- Present the disclaimer in a polished but clearly visible way; do not hide it in tiny text or low-contrast styling.
 
 ## Accessibility and output rules
 

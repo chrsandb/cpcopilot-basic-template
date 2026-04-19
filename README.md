@@ -6,12 +6,16 @@ It uses the OpenCode tool as the foundation for the chat interface and agent man
 
 It supports both traditional on-premises Check Point management servers and Smart-1 Cloud management.
 
+Learning and lab use only. This repository is designed to support research, proof-of-concept work, and internal experimentation. It is not presented as production-ready software and does not by itself ensure legal compliance.
+
 This environment works with:
 
 - GitHub Codespaces
 - native Debian/Ubuntu machines or VMs
 
 It starts the OpenCode Web UI, installs the Check Point MCP tools, provides a Check Point-focused agent and skill set, and runs a web server for HTML reports created by OpenCode agents.
+
+See [EU-AI-SOFTWARE-NOTICE.md](EU-AI-SOFTWARE-NOTICE.md) for practical EU-facing guidance on responsible use, software/AI liability expectations, data handling, and escalation triggers.
 
 
 ## Before you start
@@ -27,7 +31,7 @@ The easiest way to use this repository for a demo is to use Check Point SmartCon
    - Username: `admin`
    - Password: `demo123`
 
-**WARNING!** You can also use your own Check Point lab environment if you have one available, but the default setup in this environment will use free tools and models and may expose your data to the model provider, so please be careful and consider the implications before connecting a production environment or sensitive data.
+**WARNING!** You can also use your own Check Point lab environment if you have one available, but the default setup in this environment will use free tools and models and may expose your data to the model provider. Please be careful before connecting any production environment or using personal data, customer data, incident data, or other sensitive material.
 
 You will also need to create a free service account for the Check Point documentation tool to get the required client ID and secret key for documentation lookups.
 
@@ -139,7 +143,10 @@ This repository is provided as a public template and helper environment for work
 
 - Check Point names, product names, and marks are trademarks or registered trademarks of their respective owner.
 - Use any official logos, screenshots, or brand assets only with appropriate permission and in line with applicable brand guidelines.
-- Before connecting any non-demo environment, review the privacy, security, and data-handling implications for your organization.
+- Before connecting any non-demo environment, review the privacy, security, data-handling, and liability implications for your organization.
+- The MIT license for this repository does not by itself remove statutory liability or regulatory obligations that may apply under EU or Member State law.
+- Nothing in this repository should be read as a claim of EU legal compliance, certification, CE marking, or legal guarantee.
+- Review [EU-AI-SOFTWARE-NOTICE.md](EU-AI-SOFTWARE-NOTICE.md) and [LAB-GOVERNANCE.md](LAB-GOVERNANCE.md) before production, customer-facing, or commercial use.
 
 ## Useful commands
 

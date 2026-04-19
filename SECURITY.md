@@ -1,5 +1,7 @@
 # Security Policy
 
+This repository is intended to help teams experiment more safely, but it does not by itself ensure secure deployment, legal compliance, or production readiness.
+
 ## Supported scope
 
 This repository is a public template and helper environment for running OpenCode with Check Point-focused MCP tooling.
@@ -11,6 +13,7 @@ Please report security issues related to:
 - unsafe defaults in setup or startup behavior
 - report-server exposure or authentication issues
 - guidance that could cause unintended sensitive-data disclosure
+- wording or defaults that could encourage unsafe production use without adequate review
 
 ## Reporting a vulnerability
 
@@ -36,6 +39,17 @@ Please include, when possible:
 ## Sensitive data
 
 Do not include live credentials, API keys, production hostnames, or sensitive customer data in reports.
+
+If testing requires realistic examples, prefer synthetic, anonymized, or carefully redacted data.
+
+## Secure use expectations
+
+Users and contributors should treat this repository as a lab environment.
+
+- Validate integrations before operational use.
+- Review third-party packages, model providers, and data sources before broader deployment.
+- Do not assume the MIT license eliminates security, privacy, or liability obligations.
+- Review with qualified counsel and appropriate security reviewers before production or commercial use.
 
 ## Response expectations
 

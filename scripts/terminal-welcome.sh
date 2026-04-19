@@ -33,8 +33,11 @@ fi
 echo ""
 echo "🚀 Check Point CoPilot terminal ready"
 echo "- Instructions   : ${REPO_ROOT}/INSTRUCTIONS.md"
+echo "- EU use notice  : ${REPO_ROOT}/EU-AI-SOFTWARE-NOTICE.md"
 echo "- Guided setup   : bash scripts/first-run-checkpoint-setup.sh"
 echo "- OpenCode start : after visible setup completes in this terminal"
+echo "- Use context    : learning, lab testing, research, proof-of-concept, internal experimentation"
+echo "- Important      : not production-ready; avoid personal data, customer data, and sensitive material unless separately reviewed"
 
 if [[ -t 0 && -t 1 && "${SETUP_COMPLETE}" != "true" ]]; then
   echo ""

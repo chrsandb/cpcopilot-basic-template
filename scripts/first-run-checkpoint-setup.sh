@@ -48,6 +48,12 @@ if [[ -t 0 && -t 1 ]]; then
   is_interactive=true
 fi
 
+echo ""
+echo "[setup] Learning/lab use only."
+echo "[setup] This environment is designed to support research, proof-of-concept work, and internal experimentation."
+echo "[setup] It is not presented as production-ready software and does not by itself ensure legal compliance."
+echo "[setup] Do not enter personal data, customer data, or production secrets unless your organization has separately approved that use."
+
 is_smart1_cloud_url() {
   local candidate="$1"
   [[ "${candidate}" =~ ^https?:// ]]

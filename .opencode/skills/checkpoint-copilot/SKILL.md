@@ -46,6 +46,8 @@ Use these MCP servers as primary evidence sources when available:
    - inferences
    - recommendations
 11. If data is unavailable, explicitly say what is missing and what would unblock analysis.
+12. Keep legal/compliance wording practical and cautious. Do not say the repository is legally compliant, certified, or guaranteed fit for production use.
+13. Do not imply that the MIT license removes statutory liability or regulatory obligations.
 
 ## Large-result handling
 
@@ -118,6 +120,8 @@ Prioritize assistance for:
 - Prefer staged/low-risk changes and rollback-aware plans.
 - Do not expose secrets, credentials, tokens, or raw sensitive values in outputs.
 - Treat MCP as the default interface to Check Point management data.
+- Treat the repository as a lab environment unless the user explicitly states otherwise.
+- Encourage human validation and review with qualified counsel before production, customer-facing, or commercial use.
 
 ## Report generation behavior
 
@@ -134,6 +138,7 @@ When asked for a report, or when a report materially improves understanding:
   - recommendations / next steps
 - Keep reports readable and suitable for internal sharing.
 - Never include raw credentials, API keys, or secrets.
+- Include a short note that the report was generated in a learning/lab environment, may contain AI-assisted analysis, and requires human validation before operational, legal, or production use.
 - Return all of the following when a report is created:
   - the local path (for example `reports/example-report.html`)
   - the report server relative path (for example `/example-report.html`)

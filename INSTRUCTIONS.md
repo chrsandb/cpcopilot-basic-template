@@ -2,9 +2,12 @@
 
 Welcome to the Check Point-focused OpenCode environment for Codespaces or local Linux. If you can see this file displayed in the Codespace, you're in the right place!
 
+This repository is intended for learning, lab testing, research, proof-of-concept work, and internal experimentation. It is not presented as production-ready software and does not by itself ensure legal compliance. See [EU-AI-SOFTWARE-NOTICE.md](EU-AI-SOFTWARE-NOTICE.md) for practical guidance.
+
 ## What to do first
 
 1. Complete the guided setup shown in the terminal if prompted. This will ask you for the required values to connect to the Check Point management server and to configure the OpenCode and reports servers. The first management prompt accepts either an on-premises DNS/IP value or a Smart-1 Cloud URL. If you have already set these values as Codespaces secrets, they will already be available to the setup script, so you may be able to continue with little or no input.
+   - Use demo, synthetic, anonymized, or carefully redacted inputs whenever possible. Do not treat this environment as a safe default for personal data, customer data, or production secrets.
 2. After setup finishes, OpenCode and the reports server start automatically for you in Codespaces.
 3. Open the Reports link shown in the terminal. It should be empty at first because you have not generated any reports yet.
 4. Open the OpenCode link shown in the terminal. By default, OpenCode starts without a login prompt. If you provided a non-empty OpenCode password during setup, log in with the credentials you configured (default username: `opencode`).
@@ -12,6 +15,7 @@ Welcome to the Check Point-focused OpenCode environment for Codespaces or local 
    - In the OpenCode Web UI, you can close the right-side pane to make more room for the conversation by clicking the second icon at the top of that pane.
    - In the OpenCode Web UI, you can also click the icon in the top-left corner to open the sessions list and switch between sessions later.
 6. Ask the `CheckPoint-copilot` agent questions or request reports about your Check Point environment, policies, logs, threat prevention, HTTPS inspection, and documentation, or just start with a simple "hey" to confirm that it's working.
+   - Treat generated answers and reports as analysis support. They require human validation before operational use.
 
 ## What to do next
 

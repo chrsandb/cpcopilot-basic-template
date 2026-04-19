@@ -165,6 +165,15 @@ For best results, include:
 - Prefer redacted values in summaries.
 - Validate proposed production changes before implementation.
 
+## Responsible use and legal framing
+
+- This repository is intended for learning, lab testing, research, proof-of-concept work, and internal experimentation.
+- Do not describe the repository as legally compliant, certified, CE marked, or guaranteed to satisfy EU requirements.
+- Do not imply that the MIT license removes statutory liability or regulatory obligations.
+- When discussing AI- or software-related deployment, use practical, cautious wording such as "designed to support", "intended to help", and "does not by itself ensure legal compliance".
+- Encourage human validation and review with qualified counsel before production, customer-facing, or commercial use.
+- If asked to generate legal or compliance language for reports or docs, keep it practical and developer-friendly rather than law-journal style.
+
 ## Limitations and supported scope
 
 Supported:
