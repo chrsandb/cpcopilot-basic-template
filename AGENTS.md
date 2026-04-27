@@ -55,6 +55,8 @@ Two additional MCP servers are supported as optional integrations:
 
 Each optional MCP requires its own API key. If the corresponding key is not provided, that MCP remains disabled in OpenCode settings.
 
+Threat Emulation scanning in this repository is path-based. Files should be placed on disk first, preferably in the root `emulation/` folder, and then scanned by local path. Attaching a file directly in chat is not the supported Threat Emulation workflow here.
+
 ## How to open the OpenCode Web UI
 
 - Open the forwarded port for `OPENCODE_PORT` (default `4096`) in Codespaces.
@@ -163,8 +165,9 @@ For best results, include:
 
 ### Threat emulation
 
-- "Analyze this suspicious file with Threat Emulation and summarize the verdict."
-- "Use the threat-emulation MCP to scan a suspicious attachment and explain the result."
+- "Scan emulation/suspicious.pdf with Threat Emulation and summarize the verdict."
+- "Analyze emulation/invoice.docm with the threat-emulation MCP."
+- "Download a sample into emulation/ with wget, then scan it by local path."
 
 ### Documentation lookup
 

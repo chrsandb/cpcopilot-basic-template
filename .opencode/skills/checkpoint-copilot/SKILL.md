@@ -31,25 +31,28 @@ Use these MCP servers as primary evidence sources when available:
 2. Use the documentation MCP for product/documentation grounding when configuration or behavior is unclear.
 3. For Check Point data access, use MCP servers instead of direct raw API calls.
 4. Do not use `curl`, ad-hoc Python requests, or bash scripts against the Check Point management API unless the user explicitly asks for raw API troubleshooting or MCP is unavailable and you clearly state that fallback.
-5. When tool outputs may be large, noisy, paginated, or contain many similar objects/rules/log rows, do **not** rely on a quick skim or a tiny sample.
-6. For large-result tasks, prefer one of these patterns before answering:
+5. For Threat Emulation file analysis, first identify a usable local file path and prefer `scan_file` for normal end-to-end analysis requests.
+6. Use `upload_file` plus `query_file` only for advanced staged workflows, and use `download_report` only after a prior result provides an XML report id.
+7. If a user tries to attach a file in chat for Threat Emulation, explain that chat attachment upload will not work for this MCP workflow here. Tell them the file must exist on disk, ideally in `emulation/`, or be downloaded there with `wget`, then scanned by path.
+8. When tool outputs may be large, noisy, paginated, or contain many similar objects/rules/log rows, do **not** rely on a quick skim or a tiny sample.
+9. For large-result tasks, prefer one of these patterns before answering:
   - spawn sub-agents to inspect the full returned dataset and report back the relevant matches, clusters, or summaries
   - or perform a systematic full-data pass yourself, grouping, filtering, and summarizing the complete result before drawing conclusions
-7. Use sub-agents especially for:
+10. Use sub-agents especially for:
   - long rulebases
   - broad object inventories
   - large log searches
   - many exceptions/exclusions
   - threat-prevention findings with many rows
-8. If you summarize large data, say whether the summary is based on the full returned dataset, filtered subsets, or explicit limits.
-9. If a tool result appears truncated, incomplete, or ambiguously sampled, say so and continue investigation rather than presenting a confident but partial answer.
-10. Clearly label:
+11. If you summarize large data, say whether the summary is based on the full returned dataset, filtered subsets, or explicit limits.
+12. If a tool result appears truncated, incomplete, or ambiguously sampled, say so and continue investigation rather than presenting a confident but partial answer.
+13. Clearly label:
    - facts (tool/documentation-backed)
    - inferences
    - recommendations
-11. If data is unavailable, explicitly say what is missing and what would unblock analysis.
-12. Keep legal/compliance wording practical and cautious. Do not say the repository is legally compliant, certified, or guaranteed fit for production use.
-13. Do not imply that the MIT license removes statutory liability or regulatory obligations.
+14. If data is unavailable, explicitly say what is missing and what would unblock analysis.
+15. Keep legal/compliance wording practical and cautious. Do not say the repository is legally compliant, certified, or guaranteed fit for production use.
+16. Do not imply that the MIT license removes statutory liability or regulatory obligations.
 
 ## Large-result handling
 
@@ -111,6 +114,7 @@ Prioritize assistance for:
 - HTTPS inspection analysis
 - reputation lookups for URLs, IPs, and file hashes
 - threat emulation and malware-analysis workflows when the optional MCP is configured
+- path-based threat emulation scans from files staged in `emulation/` or another local path
 - troubleshooting
 - safe operational recommendations
 - documentation lookup

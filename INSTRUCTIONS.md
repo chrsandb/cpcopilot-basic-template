@@ -9,6 +9,7 @@ This repository is intended for learning, lab testing, research, proof-of-concep
 1. Complete the guided setup shown in the terminal if prompted. This will ask you for the required values to connect to the Check Point management server and to configure the OpenCode and reports servers. The first management prompt accepts either an on-premises DNS/IP value or a Smart-1 Cloud URL. It also offers optional API key prompts for the Reputation Service and Threat Emulation MCP servers. If you have already set these values as Codespaces secrets, they will already be available to the setup script, so you may be able to continue with little or no input.
    - Use demo, synthetic, anonymized, or carefully redacted inputs whenever possible. Do not treat this environment as a safe default for personal data, customer data, or production secrets.
    - If you skip either optional MCP API key, that MCP stays disabled in OpenCode until you add the key and rerun setup.
+   - Threat Emulation file scanning is path-based. Put files on disk first, preferably in the root `emulation/` folder, then ask OpenCode to scan them by path.
 2. After setup finishes, OpenCode and the reports server start automatically for you in Codespaces.
 3. *Open the Reports link shown in the terminal.*
    - It should be empty at first because you have not generated any reports yet.
@@ -34,7 +35,8 @@ Here are some example prompts to try:
 - "Connect to my Smart-1 Cloud management URL and list the available policy layers."
 - "Check the reputation of gmil.com and explain what Check Point knows about it."
 - "Check the reputation of IP 103.243.240.249 and summarize the risk."
-- "Analyze this suspicious file with Threat Emulation and summarize the verdict."
+- "Scan emulation/suspicious.pdf with Threat Emulation and summarize the verdict."
+- "Analyze emulation/invoice.docm with the threat-emulation MCP."
 
 ## Tips
 
@@ -45,3 +47,12 @@ Here are some example prompts to try:
 *Tip #3:* If you are signed in to a GitHub account with a GitHub Copilot subscription, you can also choose one of the GitHub Copilot models from the lower-left panel in the OpenCode Web UI and have the agent use that model for responses. This can improve privacy because your data will not be sent to free providers, and it can also improve speed and response quality by using GitHub Copilot's commercial models.
 
 *Tip #4:* You can also manually configure other providers or models from the settings cog icon in the lower-left corner of the OpenCode Web UI.
+
+*Tip #5:* If you want to use Threat Emulation, stage files in the root `emulation/` folder first. You can copy files there manually or download them from the terminal with:
+
+```bash
+cd emulation
+wget <URL>
+```
+
+Attaching a file directly in the OpenCode chat is not the supported Threat Emulation workflow in this repository because the MCP reads files from disk by path.

@@ -41,6 +41,8 @@ Those same documentation portal credentials are also used by the Spark Managemen
 
 If you also want to enable the optional Reputation Service or Threat Emulation MCP servers, each requires its own API key. These optional MCPs stay installed but disabled unless you provide the corresponding key during setup or through Codespaces secrets.
 
+Threat Emulation file scanning in this repository is path-based. Save or download files to disk first, preferably into the root `emulation/` folder, and then ask OpenCode to scan them by path. Attaching a file directly in chat is not the supported Threat Emulation workflow here.
+
 1. Navigate to https://portal.checkpoint.com/ and log in with your account.
 2. Select an account/tenant where you are an administrator.
 3. Click the cog-wheel settings icon in the middle of the top bar.
@@ -117,6 +119,30 @@ If Git is not already installed, see https://github.com/git-guides/install-git o
   - If the `CheckPoint-copilot` agent is visible and active in the lower-left corner of the OpenCode Web UI, you are in the right folder and session. If not, open the folder list from the top-left `...` menu and select the session with the path to this repository.
 7. Ask the `CheckPoint-copilot` agent questions or request reports about your Check Point environment, policies, logs, threat prevention, HTTPS inspection, and documentation, or just start with a simple "hey" to confirm that it's working.
 8. See [INSTRUCTIONS.md](INSTRUCTIONS.md) for example prompts and tips.
+
+### Threat Emulation workflow
+
+Use the root `emulation/` folder as the standard staging area for files you want to scan with Threat Emulation.
+
+Supported ways to get files there:
+
+- copy or move files into `emulation/`
+- download files there from the terminal, for example:
+
+```bash
+cd emulation
+wget <URL>
+```
+
+Then ask OpenCode to scan the file by path, for example:
+
+- `Scan emulation/suspicious.pdf with Threat Emulation and summarize the verdict.`
+- `Analyze emulation/invoice.docm with the threat-emulation MCP.`
+
+Important limitation:
+
+- Uploading or attaching a file directly in the OpenCode chat is not the supported Threat Emulation input path in this repository.
+- The file must already exist on disk and be referenced by path.
 
 Outside Codespaces, the startup scripts prefer the machine's local network IP and fall back to `localhost` when needed.
 
